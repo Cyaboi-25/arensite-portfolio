@@ -5,27 +5,92 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Arensite — Web Design Portfolio</title>
 <style>
-  body { margin: 0; background: #EDE3C8; font-family: Georgia, serif;
-         display: flex; align-items: center; justify-content: center;
-         min-height: 100vh; }
-  .wrap { text-align: center; padding: 3rem; }
-  h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 300;
-       color: #2A4027; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
-  p { font-style: italic; color: #5E4D38; font-size: 1.1rem;
-      margin-bottom: 2.5rem; }
-  .links { display: flex; flex-direction: column; gap: 1rem; }
-  a { font-family: Georgia, serif; font-size: 0.9rem; letter-spacing: 0.15em;
-      color: #2A4027; text-decoration: none; font-variant: small-caps;
-      border-bottom: 1px solid #C49A3C; padding-bottom: 0.1rem;
-      display: inline-block; }
+  :root {
+    --color-bg: #0A0D12;
+    --color-surface: #111520;
+    --color-border: rgba(255, 255, 255, 0.08);
+    --color-accent: #F0A500;
+    --color-accent-hover: #FFB820;
+    --color-accent-muted: rgba(240, 165, 0, 0.15);
+    --color-text-primary: #EAE8E4;
+    --color-text-muted: #7A7872;
+    --color-cta-text: #0A0D12;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--color-bg);
+    color: var(--color-text-primary);
+    font-family: Inter, system-ui, sans-serif;
+    font-size: clamp(1rem, 1.5vw + 0.25rem, 1.125rem);
+    line-height: 1.7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  .wrap {
+    max-width: 720px;
+    width: 100%;
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+  h1 {
+    font-size: clamp(2.369rem, 5vw + 1rem, 3.157rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
+    margin-bottom: 0.5rem;
+  }
+  .tagline {
+    color: var(--color-text-muted);
+    font-size: clamp(1rem, 1.5vw + 0.25rem, 1.125rem);
+    margin-bottom: 3rem;
+  }
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+  a.site-link {
+    display: inline-block;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1rem 1.75rem;
+    color: var(--color-text-primary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  a.site-link:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 1px var(--color-accent-muted), 0 4px 24px var(--color-accent-muted);
+  }
+  a.site-link:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+  .site-label {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--color-accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1>Arensite</h1>
-  <p>Web design by Chris Johnson</p>
+  <p class="tagline">Web design by Chris Johnson — Frostburg, MD</p>
   <div class="links">
-    <a href="./mock-sites/nettle-patch/">The Nettle Patch — Herb Shop &amp; Apothecary</a>
+    <a href="./mock-sites/nettle-patch/" class="site-link">
+      <span class="site-label">Mock Site</span>
+      The Nettle Patch — Herb Shop &amp; Apothecary
+    </a>
   </div>
 </div>
 </body>
