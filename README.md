@@ -8,7 +8,7 @@ Every site built here starts with art direction, not templates.
 
 ## Mock Sites
 
-- [The Nettle Patch](./mock-sites/nettle-patch/) — Herb shop & apothecary
+- [Wildmoor Botanicals](./mock-sites/nettle-patch/) — Herb shop & apothecary
 
 ## Client Work
 
