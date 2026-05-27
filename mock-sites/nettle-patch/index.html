@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Nettle Patch — Herb Shop & Apothecary · Frostburg, MD</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ground:    #EDE3C8;
+  --green-deep:#2A4027;
+  --green-mid: #4A6B45;
+  --brown:     #6B4226;
+  --gold:      #C49A3C;
+  --sage:      #8A9E7A;
+  --heading:   #2A2018;
+  --body:      #3D3020;
+  --muted:     #5E4D38;
+  --font-d: 'Cormorant Garamond', Georgia, serif;
+  --font-b: 'Lora', Georgia, serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background-color: var(--ground);
+  color: var(--body);
+  font-family: var(--font-b);
+  font-size: clamp(1rem, 1.4vw + 0.3rem, 1.1rem);
+  line-height: 1.78;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+h1,h2,h3 { font-family: var(--font-d); font-weight: 300; line-height: 1.1; color: var(--heading); }
+
+/* grain handled via inline SVG overlays */
+.label {
+  font-family: var(--font-d); font-variant: small-caps; letter-spacing: 0.18em;
+  font-size: 0.86rem; color: var(--muted); display: block;
+}
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  padding: 1.4rem 3rem; display: flex; justify-content: space-between; align-items: center;
+  transition: background 0.4s ease, backdrop-filter 0.4s ease;
+}
+nav.scrolled {
+  background: rgba(240,234,214,0.92); backdrop-filter: blur(8px);
+  box-shadow: 0 1px 0 rgba(196,154,60,0.2);
+}
+.nav-mark {
+  font-family: var(--font-d); font-variant: small-caps; font-size: 1.05rem;
+  letter-spacing: 0.22em; font-weight: 600; color: var(--heading);
+}
+.nav-links { display: flex; gap: 2.5rem; }
+.nav-links a {
+  font-family: var(--font-d); font-variant: small-caps; font-size: 0.92rem;
+  letter-spacing: 0.15em; color: var(--muted); transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--heading); }
+
+/* HERO */
+.hero {
+  min-height: 100vh; display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 7rem 3rem 3rem;
+  position: relative; overflow: hidden;
+}
+.hero-text { padding-right: 3rem; }
+.hero-label { margin-bottom: 2rem; }
+.hero-wordmark {
+  font-size: clamp(2.8rem, 5vw + 1rem, 5.5rem);
+  font-weight: 300; color: var(--green-deep);
+  margin-bottom: 1rem;
+  opacity: 0; transform: translateY(14px);
+  transition: opacity 1s ease 0.5s, transform 1s ease 0.5s;
+}
+body.loaded .hero-wordmark { opacity: 1; transform: translateY(0); }
+.hero-tagline {
+  font-family: var(--font-d); font-style: italic; font-weight: 300;
+  font-size: clamp(1.1rem, 2vw, 1.5rem); color: var(--muted);
+  margin-bottom: 2rem;
+  opacity: 0; transition: opacity 1s ease 0.9s;
+}
+body.loaded .hero-tagline { opacity: 0.85; }
+.hero-cta {
+  display: inline-block; font-family: var(--font-d); font-variant: small-caps;
+  letter-spacing: 0.15em; font-size: 0.92rem; color: var(--green-deep);
+  border-bottom: 1px solid var(--gold); padding-bottom: 0.15rem;
+  opacity: 0; transition: opacity 1s ease 1.2s;
+}
+body.loaded .hero-cta { opacity: 1; }
+
+.hero-image-col {
+  position: relative; height: 100vh;
+  opacity: 0; transform: translateX(20px);
+  transition: opacity 1.2s ease 0.3s, transform 1.2s ease 0.3s;
+}
+body.loaded .hero-image-col { opacity: 1; transform: translateX(0); }
+.hero-photo {
+  width: 100%; height: 100%; object-fit: cover;
+  object-position: center top;
+  mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%),
+              linear-gradient(to bottom, transparent 0%, black 5%, black 90%, transparent 100%);
+  mask-composite: intersect;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%),
+                      linear-gradient(to bottom, transparent 0%, black 5%, black 90%, transparent 100%);
+  -webkit-mask-composite: destination-in;
+}
+
+.hero-rule { position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: var(--gold); opacity: 0.4; }
+
+/* ABOUT */
+.about-wrap { position: relative; padding: 7rem 3rem; }
+.about-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 5fr 7fr;
+  gap: 5rem; align-items: center;
+}
+.about-photo-col { position: relative; }
+.about-photo {
+  width: 100%; aspect-ratio: 4/5; object-fit: cover;
+  clip-path: polygon(
+    4% 6%, 8% 2%, 12% 5%, 17% 0%, 21% 4%, 26% 0%,
+    30% 5%, 35% 0%, 40% 4%, 45% 0%, 50% 5%, 55% 0%,
+    60% 4%, 65% 0%, 70% 5%, 75% 0%, 80% 4%, 85% 1%,
+    90% 5%, 95% 1%, 98% 4%, 100% 2%,
+    100% 94%, 97% 98%, 93% 95%, 89% 100%, 85% 96%,
+    80% 100%, 76% 96%, 71% 100%, 67% 95%, 62% 100%,
+    57% 95%, 52% 100%, 47% 96%, 42% 100%, 37% 95%,
+    32% 100%, 27% 96%, 22% 100%, 17% 96%, 12% 100%,
+    7% 96%, 2% 100%, 0% 97%
+  );
+}
+.about-gold-rule {
+  position: absolute; left: -1.5rem; top: 15%; bottom: 15%;
+  width: 1px; background: var(--gold); opacity: 0.5;
+}
+.about-content { padding-left: 1rem; }
+.about-headline {
+  font-size: clamp(1.8rem, 3vw + 0.5rem, 2.8rem);
+  color: var(--green-deep); margin-bottom: 2rem;
+}
+.about-body { max-width: 58ch; margin-bottom: 1.3rem; color: var(--body); }
+.thread {
+  position: absolute; left: max(1rem, calc(50% - 640px));
+  top: 0; bottom: 0; width: 18px; pointer-events: none;
+}
+.thread svg { width: 100%; height: 100%; }
+
+.gold-rule {
+  height: 1px; margin: 0;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.4;
+}
+
+/* HERB CARDS */
+.herbs-wrap { background: #E6D9B8; padding: 7rem 3rem; }
+.herbs-inner { max-width: 1200px; margin: 0 auto; }
+.herbs-header {
+  display: grid; grid-template-columns: 1fr 3fr;
+  gap: 2.5rem; align-items: end; margin-bottom: 4rem;
+}
+.section-headline { font-size: clamp(1.6rem, 3vw, 2.6rem); color: var(--green-deep); }
+.cards-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2rem; align-items: start;
+}
+.herb-card {
+  display: flex; flex-direction: column;
+  box-shadow: 0 4px 24px rgba(42,64,39,0.1);
+  border-radius: 2px; overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.herb-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(42,64,39,0.18); }
+.card-art {
+  width: 100%; aspect-ratio: 4/3;
+  overflow: hidden; position: relative;
+}
+.card-1 .card-art {
+  clip-path: polygon(
+    0% 9%,3% 4%,6% 8%,10% 2%,14% 7%,18% 1%,22% 6%,26% 1%,
+    30% 7%,34% 2%,38% 8%,42% 1%,46% 7%,50% 0%,54% 6%,58% 1%,
+    62% 7%,66% 1%,70% 8%,74% 1%,78% 7%,82% 1%,86% 7%,90% 1%,
+    94% 6%,97% 3%,100% 5%,100% 100%,0% 100%
+  );
+}
+.card-2 .card-art {
+  clip-path: polygon(
+    0% 7%,4% 2%,8% 6%,12% 1%,16% 5%,20% 0%,24% 5%,28% 1%,
+    32% 6%,36% 0%,40% 5%,44% 1%,48% 6%,52% 0%,56% 5%,60% 1%,
+    64% 6%,68% 0%,72% 5%,76% 1%,80% 6%,84% 0%,88% 5%,92% 1%,
+    96% 5%,100% 2%,100% 100%,0% 100%
+  );
+}
+.card-3 .card-art {
+  clip-path: polygon(
+    0% 8%,3% 3%,7% 7%,11% 1%,15% 6%,19% 1%,23% 7%,27% 2%,
+    31% 7%,35% 1%,39% 6%,43% 1%,47% 7%,51% 0%,55% 6%,59% 1%,
+    63% 7%,67% 1%,71% 6%,75% 1%,79% 7%,83% 1%,87% 6%,91% 1%,
+    95% 6%,98% 3%,100% 6%,100% 100%,0% 100%
+  );
+}
+.card-photo {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.herb-card:hover .card-photo { transform: scale(1.04); }
+.card-divider { height: 1px; background: var(--gold); opacity: 0.75; flex-shrink: 0; }
+.card-text { padding: 1.4rem 1.6rem 1.8rem; flex: 1; }
+.ct-1 { background: #506A4C; }
+.ct-2 { background: #4A3D72; }
+.ct-3 { background: #7A5A28; }
+.card-label {
+  font-family: var(--font-d); font-variant: small-caps; letter-spacing: 0.15em;
+  font-size: 0.82rem; color: rgba(255,255,255,0.88); display: block; margin-bottom: 0.75rem;
+}
+.card-poem {
+  font-family: var(--font-d); font-style: italic; font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  line-height: 1.5; color: rgba(255,255,255,0.97); margin-bottom: 1rem; font-weight: 400;
+}
+.card-note {
+  font-family: var(--font-d); font-variant: small-caps; font-size: 0.76rem;
+  letter-spacing: 0.12em; color: rgba(255,255,255,0.68);
+}
+
+/* WORKSHOPS */
+.workshops-wrap { padding: 0; background: var(--ground); }
+.workshop-image-banner {
+  width: 100%; height: 420px; overflow: hidden; position: relative;
+}
+.workshop-banner-photo {
+  width: 100%; height: 100%; object-fit: cover;
+  object-position: center 40%;
+  filter: brightness(0.72) sepia(0.2);
+}
+.workshop-banner-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(42,64,39,0.3) 0%, rgba(42,64,39,0.7) 100%);
+  display: flex; align-items: flex-end;
+  padding: 3rem;
+}
+.workshop-banner-text {
+  font-family: var(--font-d); font-weight: 400; font-size: clamp(2rem, 4vw, 3.5rem);
+  color: #F0EAD6; line-height: 1.15;
+}
+.workshop-content { padding: 5rem 3rem; max-width: 1200px; margin: 0 auto; }
+.workshops-grid { display: grid; grid-template-columns: 4fr 7fr; gap: 3.5rem; align-items: start; }
+.workshop-intro { padding-top: 0.5rem; }
+.basil-watermark {
+  display: block;
+  width: 90%;
+  max-width: 210px;
+  margin: 3rem 0 0 -1.5rem;
+  pointer-events: none;
+  opacity: 0.48;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: radial-gradient(ellipse 50% 58% at 48% 52%, black 0%, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0.4) 55%, transparent 78%);
+  mask-image: radial-gradient(ellipse 50% 58% at 48% 52%, black 0%, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0.4) 55%, transparent 78%);
+}
+.workshop-intro-head { font-size: clamp(1.1rem, 1.5vw, 1.25rem); color: var(--green-deep); margin-bottom: 1rem; font-family: var(--font-d); font-style: italic; font-weight: 400; }
+.workshop-list { display: flex; flex-direction: column; }
+.workshop-item {
+  display: grid; grid-template-columns: 5rem 1fr;
+  gap: 1.5rem; padding: 1.6rem 0;
+  border-bottom: 1px solid rgba(196,154,60,0.22);
+  opacity: 0; transform: translateY(8px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.workshop-item.revealed { opacity: 1; transform: translateY(0); }
+.workshop-date {
+  font-family: var(--font-d); font-size: 0.86rem; letter-spacing: 0.08em;
+  color: var(--gold); text-transform: uppercase; padding-top: 0.25rem;
+}
+.workshop-title {
+  font-family: var(--font-d); font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+  font-weight: 400; color: var(--green-deep); margin-bottom: 0.3rem;
+}
+.workshop-desc { font-size: 1rem; color: var(--muted); line-height: 1.68; }
+
+/* SPOONS FEATURE */
+.spoons-feature {
+  background: var(--ground);
+  padding: 6rem 3rem;
+}
+.spoons-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: center;
+}
+.spoons-photo-col { position: relative; }
+.spoons-photo {
+  width: 100%; aspect-ratio: 4/3;
+  object-fit: cover; object-position: center 35%;
+  clip-path: polygon(
+    0% 8%,3% 3%,7% 7%,11% 1%,15% 6%,19% 1%,23% 7%,27% 2%,
+    31% 7%,35% 1%,39% 6%,43% 1%,47% 7%,51% 0%,55% 6%,59% 1%,
+    63% 7%,67% 1%,71% 6%,75% 1%,79% 7%,83% 1%,87% 6%,91% 1%,
+    95% 6%,98% 3%,100% 5%,100% 100%,0% 100%
+  );
+}
+.spoons-quote-col {
+  padding-left: 1rem;
+  border-left: 1px solid rgba(196,154,60,0.35);
+}
+.spoons-text {
+  font-family: var(--font-d); font-style: italic; font-weight: 400;
+  font-size: clamp(1.3rem, 2.2vw, 1.9rem); color: var(--green-deep);
+  line-height: 1.55; margin-bottom: 1.5rem;
+}
+.spoons-attribution {
+  font-family: var(--font-d); font-variant: small-caps;
+  letter-spacing: 0.15em; font-size: 0.82rem;
+  color: var(--muted); display: block;
+}
+
+/* VISIT */
+.visit-wrap { background: var(--green-deep); padding: 7rem 3rem; position: relative; overflow: hidden; }
+.visit-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+}
+.visit-label { color: rgba(196,154,60,0.65); margin-bottom: 1.5rem; }
+.visit-headline {
+  font-size: clamp(2rem, 4vw, 3.5rem); color: #F0EAD6;
+  margin-bottom: 1.5rem; font-weight: 300;
+}
+.visit-body { color: rgba(240,234,214,0.84); margin-bottom: 1.5rem; max-width: 44ch; font-size: 1rem; }
+.visit-link {
+  display: inline-block; font-family: var(--font-d); font-size: clamp(1rem, 1.8vw, 1.3rem);
+  color: var(--gold); border-bottom: 1px solid rgba(196,154,60,0.4); padding-bottom: 0.1rem;
+  transition: border-color 0.3s;
+}
+.visit-link:hover { border-color: var(--gold); }
+.visit-photo-col { position: relative; }
+.visit-photo {
+  width: 100%; aspect-ratio: 4/5; object-fit: cover;
+  clip-path: polygon(
+    0% 6%,4% 2%,8% 6%,12% 1%,16% 5%,20% 0%,25% 5%,30% 1%,
+    35% 6%,40% 0%,45% 5%,50% 0%,55% 5%,60% 1%,65% 6%,70% 0%,
+    75% 5%,80% 1%,85% 6%,90% 0%,95% 5%,98% 2%,100% 4%,
+    100% 100%,0% 100%
+  );
+  opacity: 0.85;
+}
+.hours-grid {
+  display: grid; grid-template-columns: auto 1fr;
+  gap: 0.35rem 1.5rem; margin-top: 0.5rem;
+}
+.hours-day {
+  font-family: var(--font-d); font-variant: small-caps; letter-spacing: 0.1em;
+  font-size: 0.84rem; color: rgba(196,154,60,0.88);
+}
+.hours-time { font-size: 0.94rem; color: rgba(240,234,214,0.84); }
+
+footer {
+  padding: 1.6rem 3rem; background: var(--green-deep);
+  border-top: 1px solid rgba(196,154,60,0.15);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-mark {
+  font-family: var(--font-d); font-variant: small-caps; letter-spacing: 0.2em;
+  font-size: 0.85rem; color: rgba(240,234,214,0.75); font-weight: 600;
+}
+.footer-copy { font-size: 0.78rem; color: rgba(240,234,214,0.42); letter-spacing: 0.06em; }
+
+.reveal { opacity: 0; transform: translateY(12px); transition: opacity 0.75s ease, transform 0.75s ease; }
+.reveal.revealed { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+  .spoons-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .spoons-quote-col { border-left: none; border-top: 1px solid rgba(196,154,60,0.35); padding-left: 0; padding-top: 1.5rem; }
+
+  .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 7rem; }
+  .hero-image-col { height: 50vh; }
+  .hero-text { padding-right: 0; padding-bottom: 2rem; order: -1; }
+  .about-grid, .visit-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .workshops-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .basil-watermark { display: none; }
+  .cards-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
+  .thread { display: none; }
+}
+@media (max-width: 600px) {
+  nav { padding: 1.2rem 1.5rem; }
+  .nav-links { gap: 1.4rem; }
+  .nav-links a { font-size: 0.82rem; }
+  .herbs-wrap, .about-wrap, .workshops-wrap, .visit-wrap,
+  .spoons-feature, .workshop-content { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .workshop-content { padding-top: 3rem; padding-bottom: 3rem; }
+  .workshop-banner-overlay { padding: 1.5rem; }
+  .workshop-item { grid-template-columns: 4rem 1fr; gap: 1rem; padding: 1.2rem 0; }
+  .hero { padding: 6rem 1.5rem 2rem; }
+  .hero-image-col { height: 45vh; }
+  .hero-wordmark { font-size: clamp(2.4rem, 10vw, 3.5rem); }
+  .section-headline { font-size: clamp(1.5rem, 6vw, 2rem); }
+  .visit-headline { font-size: clamp(1.8rem, 7vw, 2.8rem); }
+  .about-headline { font-size: clamp(1.6rem, 6vw, 2.2rem); }
+  .card-poem { font-size: clamp(1rem, 4vw, 1.2rem); }
+  .spoons-text { font-size: 1.1rem; }
+  .hours-grid { gap: 0.3rem 1rem; }
+  footer { padding: 1.4rem 1.5rem; flex-direction: column; gap: 0.3rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+<!-- Parchment texture layer 1: fine grain -->
+<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+  style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:997;mix-blend-mode:multiply;opacity:0.06;">
+  <filter id="g1">
+    <feTurbulence type="fractalNoise" baseFrequency="0.80" numOctaves="4" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+  </filter>
+  <rect width="100%" height="100%" filter="url(#g1)"/>
+</svg>
+<!-- Parchment texture layer 2: coarse aged fibres -->
+<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+  style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:996;mix-blend-mode:multiply;opacity:0.035;">
+  <filter id="g2">
+    <feTurbulence type="turbulence" baseFrequency="0.018 0.4" numOctaves="2" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0.3"/>
+  </filter>
+  <rect width="100%" height="100%" filter="url(#g2)"/>
+</svg>
+<!-- Parchment vignette: slightly darker at edges -->
+<div aria-hidden="true" style="position:fixed;inset:0;z-index:995;pointer-events:none;
+  background: radial-gradient(ellipse at 50% 40%, transparent 50%, rgba(101,67,33,0.12) 100%);"></div>
+
+<nav id="nav">
+  <a href="#hero" class="nav-mark">The Nettle Patch</a>
+  <div class="nav-links">
+    <a href="#herbs">shop</a>
+    <a href="#learn">gather</a>
+    <a href="#visit">find us</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-text">
+    <span class="label hero-label">Herb Shop &amp; Apothecary &middot; Frostburg, MD</span>
+    <h1 class="hero-wordmark">The Nettle<br>Patch</h1>
+    <p class="hero-tagline">The plants have been waiting.</p>
+    <a href="#herbs" class="hero-cta">Browse the garden &darr;</a>
+  </div>
+  <div class="hero-image-col">
+    <img src="./assets/hero.jpg" alt="A hand raised upward holding a fresh bundle of herbs against a white wall" class="hero-photo">
+  </div>
+  <div class="hero-rule" aria-hidden="true"></div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-wrap" id="about">
+  <div class="thread" aria-hidden="true">
+    <svg viewBox="0 0 20 800" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10,0 Q16,100 7,200 Q2,300 13,400 Q19,500 5,600 Q1,700 10,800" stroke="#C49A3C" stroke-width="0.8" fill="none" opacity="0.5"/>
+    </svg>
+  </div>
+  <div class="about-grid">
+    <div class="about-photo-col reveal">
+      <div class="about-gold-rule" aria-hidden="true"></div>
+      <img src="./assets/about.jpg" alt="A wooden workshop table covered with fresh herbs, rosemary, bowls of dried flowers, and botanical preparations" class="about-photo">
+    </div>
+    <div class="reveal" style="transition-delay:0.15s">
+      <span class="label" style="margin-bottom:1.5rem">Steeped in this place</span>
+      <h2 class="about-headline">
+        The plant knows<br>
+        what you need<br>
+        before you do.
+      </h2>
+      <p class="about-body">
+        We opened our doors because the old ways of plant medicine deserve a place in daily life &mdash; not locked in textbooks, but growing on shelves, steeping in cups, passing between hands.
+      </p>
+      <p class="about-body">
+        Every herb we carry is sourced from organic growers and ethical wildcrafters. Every root traces back to someone who tended it with intention.
+      </p>
+      <p class="about-body">
+        Come in and ask questions. We are here to learn alongside you. The kettle is always on.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="gold-rule" aria-hidden="true"></div>
+
+<!-- HERB CARDS -->
+<section class="herbs-wrap" id="herbs">
+  <div class="herbs-inner">
+    <header class="herbs-header reveal">
+      <span class="label">From the garden</span>
+      <h2 class="section-headline">Not remedies.<br>Relationships.</h2>
+    </header>
+    <div class="cards-grid">
+
+      <article class="herb-card card-1 reveal">
+        <div class="card-art">
+          <img src="./assets/specimens.jpg" alt="Six botanical herb specimens laid out on a white background — roots, leaves, flowers" class="card-photo">
+        </div>
+        <div class="card-divider" aria-hidden="true"></div>
+        <div class="card-text ct-1">
+          <span class="card-label">Stinging Nettle</span>
+          <p class="card-poem">
+            What stings the hand<br>
+            nourishes the blood &mdash;<br>
+            iron remembers fire.
+          </p>
+          <span class="card-note">Iron &middot; Inflammation &middot; Spring tonic</span>
+        </div>
+      </article>
+
+      <article class="herb-card card-2 reveal" style="transition-delay:0.15s">
+        <div class="card-art" style="background:#3D2E58;">
+          <svg viewBox="0 0 280 210" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:80%;position:absolute;left:10%;top:10%;opacity:0.55">
+            <path d="M 60,200 Q 62,165 60,130 Q 59,95 62,55" stroke="#B8A8D0" stroke-width="1.5" fill="none"/>
+            <path d="M 100,200 Q 102,160 100,122 Q 99,84 102,44" stroke="#B8A8D0" stroke-width="1.5" fill="none"/>
+            <path d="M 140,200 Q 138,168 140,134 Q 141,100 138,62" stroke="#B8A8D0" stroke-width="1.5" fill="none"/>
+            <path d="M 180,200 Q 182,162 180,126 Q 179,90 182,52" stroke="#B8A8D0" stroke-width="1.5" fill="none"/>
+            <path d="M 220,200 Q 218,170 220,138 Q 221,106 218,72" stroke="#B8A8D0" stroke-width="1.5" fill="none"/>
+            <path d="M 62,55 Q 60,42 62,28" stroke="#C8B8E0" stroke-width="1.3" fill="none"/>
+            <ellipse cx="62" cy="48" rx="4" ry="6" stroke="#C8B8E0" stroke-width="1" fill="none"/>
+            <ellipse cx="60" cy="37" rx="4" ry="6" stroke="#C8B8E0" stroke-width="1" fill="none"/>
+            <ellipse cx="62" cy="27" rx="4" ry="6" stroke="#C8B8E0" stroke-width="1" fill="none"/>
+            <path d="M 102,44 Q 100,31 102,17" stroke="#C8B8E0" stroke-width="1.3" fill="none"/>
+            <ellipse cx="102" cy="38" rx="4" ry="6" stroke="#C8B8E0" stroke-width="1" fill="none"/>
+            <ellipse cx="100" cy="27" rx="4" ry="6" stroke="#C8B8E0" stroke-width="1" fill="none"/>
+            <ellipse cx="102" cy="18" rx="4" ry="6" stroke="#C8B8E0" stroke-width="1" fill="none"/>
+            <path d="M 138,62 Q 136,49 138,35" stroke="#C8B8E0" stroke-width="1.3" fill="none"/>
+            <ellipse cx="138" cy="56" rx="4" ry="6" stroke="#C8B8E0" stroke-width="1" fill="none"/>
+            <ellipse cx="136" cy="45" rx="4" ry="6" stroke="#C8B8E0" stroke-width="1" fill="none"/>
+            <ellipse cx="138" cy="36" rx="4" ry="6" stroke="#C8B8E0" stroke-width="1" fill="none"/>
+            <path d="M 182,52 Q 180,39 182,25" stroke="#C8B8E0" stroke-width="1.3" fill="none"/>
+            <ellipse cx="182" cy="46" rx="4" ry="6" stroke="#C8B8E0" stroke-width="1" fill="none"/>
+            <ellipse cx="180" cy="35" rx="4" ry="6" stroke="#C8B8E0" stroke-width="1" fill="none"/>
+            <ellipse cx="182" cy="26" rx="4" ry="6" stroke="#C8B8E0" stroke-width="1" fill="none"/>
+            <path d="M 218,72 Q 216,59 218,45" stroke="#C8B8E0" stroke-width="1.3" fill="none"/>
+            <ellipse cx="218" cy="66" rx="4" ry="6" stroke="#C8B8E0" stroke-width="1" fill="none"/>
+            <ellipse cx="216" cy="55" rx="4" ry="6" stroke="#C8B8E0" stroke-width="1" fill="none"/>
+            <ellipse cx="218" cy="46" rx="4" ry="6" stroke="#C8B8E0" stroke-width="1" fill="none"/>
+          </svg>
+        </div>
+        <div class="card-divider" aria-hidden="true"></div>
+        <div class="card-text ct-2">
+          <span class="card-label">True Lavender</span>
+          <p class="card-poem">
+            The nervous system<br>
+            is not a problem &mdash;<br>
+            it is asking for rest.
+          </p>
+          <span class="card-note">Calm &middot; Sleep &middot; Headache</span>
+        </div>
+      </article>
+
+      <article class="herb-card card-3 reveal" style="transition-delay:0.30s">
+        <div class="card-art">
+          <img src="./assets/tea.jpg" alt="A glass tea cup filled with herbal tea, a yellow chamomile flower floating inside, surrounded by dried botanicals on a wooden table" class="card-photo">
+        </div>
+        <div class="card-divider" aria-hidden="true"></div>
+        <div class="card-text ct-3">
+          <span class="card-label">German Chamomile</span>
+          <p class="card-poem">
+            Small suns on a stem,<br>
+            teaching the belly<br>
+            how to let go.
+          </p>
+          <span class="card-note">Digestion &middot; Tension &middot; Children</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="gold-rule" aria-hidden="true"></div>
+
+<!-- WORKSHOP BANNER -->
+<section class="workshops-wrap" id="learn">
+  <div class="workshop-image-banner">
+    <img src="./assets/about.jpg" alt="An herbalist's workshop table spread with fresh and dried botanical preparations" class="workshop-banner-photo">
+    <div class="workshop-banner-overlay">
+      <h2 class="workshop-banner-text">
+        Knowledge is not<br>hoarded here.
+      </h2>
+    </div>
+  </div>
+  <div class="workshop-content">
+    <div class="workshops-grid">
+      
+      <div class="reveal workshop-intro">
+        <span class="label" style="margin-bottom:1rem">Gather with us</span>
+        <p class="workshop-intro-head">
+          These classes are meant to be slow.<br>Let them steep.
+        </p>
+        <p style="font-size:0.9rem;color:var(--muted);max-width:32ch;line-height:1.7;margin-top:1rem">
+          Every session is small by design. Plants teach best in intimate rooms, with time to ask the question beneath the question.
+        </p>
+        <img src="./assets/basil.jpg" class="basil-watermark reveal" style="transition-delay:0.2s" alt="Watercolor botanical illustration of a basil plant">
+      </div>
+      <div class="workshop-list">
+        <div class="workshop-item">
+          <span class="workshop-date">June 7</span>
+          <div>
+            <p class="workshop-title">Introduction to Herbal Medicine Making</p>
+            <p class="workshop-desc">Tinctures, oxymels, and infused oils from scratch. You leave with three preparations, still warm from your hands.</p>
+          </div>
+        </div>
+        <div class="workshop-item" style="transition-delay:0.1s">
+          <span class="workshop-date">June 21</span>
+          <div>
+            <p class="workshop-title">Plant Walk: The National Road Corridor</p>
+            <p class="workshop-desc">Two hours in the field with our resident herbalist. Learn to identify, harvest, and honor what grows along Allegany&rsquo;s old roads.</p>
+          </div>
+        </div>
+        <div class="workshop-item" style="transition-delay:0.2s">
+          <span class="workshop-date">July 12</span>
+          <div>
+            <p class="workshop-title">Nervines &amp; the Nervous System</p>
+            <p class="workshop-desc">A deep study of plants that calm, clarify, and restore. Includes personal constitution assessment and a take-home blend rooted in your needs.</p>
+          </div>
+        </div>
+        <div class="workshop-item" style="transition-delay:0.3s">
+          <span class="workshop-date">Ongoing</span>
+          <div>
+            <p class="workshop-title">Private Herbal Consultation</p>
+            <p class="workshop-desc">One hour. One herbalist. One person. We start with what you&rsquo;ve already tried.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SPOONS FEATURE -->
+<div class="gold-rule" aria-hidden="true"></div>
+<section class="spoons-feature">
+  <div class="spoons-inner reveal">
+    <div class="spoons-photo-col">
+      <img src="./assets/spoons.jpg" alt="Silver measuring spoons with colorful spices and dried herbs" class="spoons-photo">
+    </div>
+    <div class="spoons-quote-col">
+      <p class="spoons-text">&ldquo;We carry over two hundred varieties of bulk dried herb &mdash; all sourced from growers who know the plant by name.&rdquo;</p>
+      <span class="spoons-attribution">From the Nettle Patch shelf</span>
+    </div>
+  </div>
+</section>
+<div class="gold-rule" aria-hidden="true"></div>
+</div>
+
+<!-- VISIT -->
+<section class="visit-wrap" id="visit">
+  <div class="visit-inner reveal">
+    <div>
+      <span class="label visit-label">Put down roots</span>
+      <h2 class="visit-headline">
+        Come in.<br>
+        The kettle<br>is usually on.
+      </h2>
+      <p class="visit-body">
+        We are on Main Street in downtown Frostburg &mdash; the same block the National Road has crossed for two centuries. Park wherever you find it. Walk slowly.
+      </p>
+      <a class="visit-link" href="mailto:hello@nettlepatch.com">hello@nettlepatch.com</a>
+      <div style="margin-top:2.5rem">
+        <span class="label" style="color:rgba(196,154,60,0.6);margin-bottom:1rem">Hours</span>
+        <div class="hours-grid">
+          <span class="hours-day">Tuesday &ndash; Friday</span>
+          <span class="hours-time">10 am &ndash; 6 pm</span>
+          <span class="hours-day">Saturday</span>
+          <span class="hours-time">10 am &ndash; 5 pm</span>
+          <span class="hours-day">Sunday</span>
+          <span class="hours-time">12 pm &ndash; 4 pm</span>
+          <span class="hours-day">Monday</span>
+          <span class="hours-time">Closed &mdash; we are foraging</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <img src="./assets/tea.jpg" alt="A glass cup of herbal tea with botanicals scattered on a warm wooden surface" class="visit-photo">
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-mark">The Nettle Patch</span>
+  <span class="footer-copy">&copy; 2026 &middot; Frostburg, MD &middot; A site by Arensight</span>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => document.body.classList.add('loaded'), 80);
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal, .workshop-item').forEach(el => io.observe(el));
+});
+</script>
+</body>
+</html>
