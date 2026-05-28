@@ -54,12 +54,16 @@ P.S. If you want to grab a time now: [CALENDLY LINK]`;
     });
 
     if (contact.includes('@')) {
-      await sendEmail(resendKey, {
-        to:      contact,
-        from:    fromEmail,
-        subject: "Got it — I'll be in touch soon",
-        text:    autoReply
-      });
+      try {
+        await sendEmail(resendKey, {
+          to:      contact,
+          from:    fromEmail,
+          subject: "Got it — I'll be in touch soon",
+          text:    autoReply
+        });
+      } catch (replyErr) {
+        console.warn('Auto-reply skipped:', replyErr.message);
+      }
     }
 
     return json({ success: true }, 200);
