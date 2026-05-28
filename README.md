@@ -17,4 +17,4 @@ Every site built here starts with art direction, not templates.
 
 ---
 
-*Arensite — chris@arensite.com*
+*Arensite — bcjoh26@gmai.com*
