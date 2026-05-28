@@ -859,12 +859,12 @@
         }
 
         var data = {
-          name:           form.elements.name.value.trim(),
-          businessName:   form.elements.businessName.value.trim(),
-          businessType:   form.elements.businessType.value.trim(),
-          hasWebsite:     form.elements.hasWebsite.value,
-          wishPeopleKnew: form.elements.wishPeopleKnew.value.trim(),
-          contact:        form.elements.contact.value.trim()
+          name:           document.getElementById('field-name').value.trim(),
+          businessName:   document.getElementById('field-business-name').value.trim(),
+          businessType:   document.getElementById('field-business-type').value.trim(),
+          hasWebsite:     document.getElementById('field-has-website').value,
+          wishPeopleKnew: document.getElementById('field-wish').value.trim(),
+          contact:        document.getElementById('field-contact').value.trim()
         };
 
         submitBtn.disabled    = true;
