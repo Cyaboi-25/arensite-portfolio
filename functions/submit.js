@@ -22,7 +22,7 @@ export async function onRequestPost(context) {
 
   const websiteLabel = { yes: 'Yes', no: 'No', 'needs-work': 'Needs work' }[hasWebsite] || hasWebsite;
   const notifyEmail  = env.NOTIFY_EMAIL || 'bcjoh26@gmail.com';
-  const fromEmail    = env.FROM_EMAIL   || 'onboarding@resend.dev';
+  const fromEmail    = 'onboarding@resend.dev';
 
   const notifyBody = `New lead from Arensite
 
