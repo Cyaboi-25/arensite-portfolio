@@ -1,97 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arensite — Web Design Portfolio</title>
-<style>
-  :root {
-    --color-bg: #0A0D12;
-    --color-surface: #111520;
-    --color-border: rgba(255, 255, 255, 0.08);
-    --color-accent: #F0A500;
-    --color-accent-hover: #FFB820;
-    --color-accent-muted: rgba(240, 165, 0, 0.15);
-    --color-text-primary: #EAE8E4;
-    --color-text-muted: #7A7872;
-    --color-cta-text: #0A0D12;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: var(--color-bg);
-    color: var(--color-text-primary);
-    font-family: Inter, system-ui, sans-serif;
-    font-size: clamp(1rem, 1.5vw + 0.25rem, 1.125rem);
-    line-height: 1.7;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-  }
-  .wrap {
-    max-width: 720px;
-    width: 100%;
-    padding: 4rem 2rem;
-    text-align: center;
-  }
-  h1 {
-    font-size: clamp(2.369rem, 5vw + 1rem, 3.157rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--color-text-primary);
-    margin-bottom: 0.5rem;
-  }
-  .tagline {
-    color: var(--color-text-muted);
-    font-size: clamp(1rem, 1.5vw + 0.25rem, 1.125rem);
-    margin-bottom: 3rem;
-  }
-  .links {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-  }
-  a.site-link {
-    display: inline-block;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-    padding: 1rem 1.75rem;
-    color: var(--color-text-primary);
-    text-decoration: none;
-    font-size: 0.95rem;
-    letter-spacing: 0.01em;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-  a.site-link:hover {
-    border-color: var(--color-accent);
-    box-shadow: 0 0 0 1px var(--color-accent-muted), 0 4px 24px var(--color-accent-muted);
-  }
-  a.site-link:focus-visible {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 3px;
-  }
-  .site-label {
-    display: block;
-    font-size: 0.78rem;
-    color: var(--color-accent);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 0.2rem;
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arensite — Web Design by Chris Johnson</title>
+  <meta name="description" content="I build doorways — into who you are, what your business means, and how you deserve to be seen. Web design by Chris Johnson.">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="Arensite — Web Design by Chris Johnson">
+  <meta property="og:description" content="I build doorways — into who you are, what your business means, and how you deserve to be seen.">
+  <meta property="og:url"         content="https://arensite.pages.dev">
+  <meta property="og:image"       content="https://arensite.pages.dev/og-image.png">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="Arensite — Web Design by Chris Johnson">
+  <meta name="twitter:description" content="I build doorways — into who you are, what your business means, and how you deserve to be seen.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="wrap">
-  <h1>Arensite</h1>
-  <p class="tagline">Web design by Chris Johnson — Frostburg, MD</p>
-  <div class="links">
-    <a href="./mock-sites/nettle-patch/" class="site-link">
-      <span class="site-label">Mock Site</span>
-      Wildmoor Botanicals — Herb Shop &amp; Apothecary
-    </a>
-  </div>
-</div>
+
+  <!-- GRAIN OVERLAY -->
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- NAVIGATION -->
+  <nav class="nav" id="nav">
+    <a href="#hero" class="nav-wordmark">Arensite</a>
+    <div class="nav-links">
+      <a href="#work">work</a>
+      <a href="#about">about</a>
+      <a href="#contact">begin</a>
+    </div>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!-- HERO — The Unforgettable Element                             -->
+  <!-- ============================================================ -->
+  <section class="hero" id="hero">
+    <div class="hero-inner">
+
+      <span class="hero-label animate-label">Web Design &middot; Chris Johnson</span>
+
+      <!-- The transformation scene -->
+      <div class="hero-scene-wrap animate-image">
+        <div class="hero-scene" id="hero-scene">
+
+          <!-- Storefront: wall texture -->
+          <div class="scene-wall"></div>
+
+          <!-- Storefront: window with interior glow -->
+          <div class="scene-window">
+            <div class="scene-window-pane"></div>
+            <div class="scene-window-glow" id="scene-glow"></div>
+            <div class="scene-window-frame-h" aria-hidden="true"></div>
+            <div class="scene-window-frame-v" aria-hidden="true"></div>
+          </div>
+
+          <!-- Storefront: door -->
+          <div class="scene-door">
+            <div class="scene-door-glass"></div>
+            <div class="scene-door-knob"></div>
+          </div>
+
+          <!-- Storefront: awning -->
+          <div class="scene-awning">
+            <div class="scene-awning-stripe"></div>
+          </div>
+
+          <!-- Storefront: sign -->
+          <div class="scene-sign">
+            <span>Thornhill &amp; Co.</span>
+          </div>
+
+          <!-- Sidewalk -->
+          <div class="scene-sidewalk"></div>
+
+          <!-- Painterly overlays (animate in) -->
+          <div class="scene-paint-overlay" id="scene-paint"></div>
+          <div class="scene-gold-light"    id="scene-gold"></div>
+          <div class="scene-vignette"      aria-hidden="true"></div>
+
+        </div>
+      </div>
+
+      <!-- Headline -->
+      <div class="hero-text">
+        <h1 class="hero-headline animate-headline">
+          I build<br>doorways.
+        </h1>
+        <p class="hero-sub animate-sub">
+          Into who you are, what your business means,<br>
+          and how you deserve to be seen.
+        </p>
+      </div>
+
+      <!-- Post-transformation line -->
+      <p class="hero-reveal" id="hero-reveal">
+        &ldquo;This is what I see when I look at your business.&rdquo;
+      </p>
+
+    </div>
+
+    <div class="hero-gold-rule" aria-hidden="true"></div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- WORK — Sunward Cards                                         -->
+  <!-- ============================================================ -->
+  <section class="work" id="work">
+    <div class="work-inner">
+
+      <header class="work-header">
+        <span class="section-label">Work</span>
+        <h2 class="section-headline">Not what I made.<br>What they became.</h2>
+      </header>
+
+      <div class="work-grid">
+
+        <!-- Card 1: Thornhill Candle Co. -->
+        <article class="card card-1 scroll-reveal">
+          <div class="card-image">
+            <div class="card-image-inner ci-candle"></div>
+          </div>
+          <div class="card-divider" aria-hidden="true"></div>
+          <div class="card-text ct-peach">
+            <span class="card-label">Thornhill Candle Co.</span>
+            <p class="card-poem">
+              Warmth that people buy<br>
+              isn&rsquo;t wax &mdash; it&rsquo;s what they find<br>
+              when the wick goes out.
+            </p>
+            <span class="card-descriptor">Brand identity &middot; E-commerce</span>
+          </div>
+        </article>
+
+        <!-- Card 2: Meridian Fitness -->
+        <article class="card card-2 scroll-reveal" style="--stagger: 0.15s">
+          <div class="card-image">
+            <div class="card-image-inner ci-water"></div>
+          </div>
+          <div class="card-divider" aria-hidden="true"></div>
+          <div class="card-text ct-stone">
+            <span class="card-label">Meridian Fitness</span>
+            <p class="card-poem">
+              The body remembers<br>
+              what the mind pretended<br>
+              to forget.
+            </p>
+            <span class="card-descriptor">Web presence &middot; Photography</span>
+          </div>
+        </article>
+
+        <!-- Card 3: Blue Heron Books -->
+        <article class="card card-3 scroll-reveal" style="--stagger: 0.30s">
+          <div class="card-image">
+            <div class="card-image-inner ci-forest"></div>
+          </div>
+          <div class="card-divider" aria-hidden="true"></div>
+          <div class="card-text ct-sage">
+            <span class="card-label">Blue Heron Books</span>
+            <p class="card-poem">
+              Some books are written<br>
+              to be found rather than sought.<br>
+              This is that kind of shop.
+            </p>
+            <span class="card-descriptor">Visual identity &middot; Digital presence</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ABOUT                                                        -->
+  <!-- ============================================================ -->
+  <section class="about" id="about">
+
+    <div class="thread-line" aria-hidden="true">
+      <svg viewBox="0 0 20 900" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10,0 Q16,110 7,220 Q2,330 13,440 Q19,550 5,660 Q1,770 10,900"
+              stroke="#C49A3C" stroke-width="0.8" fill="none" opacity="0.55"/>
+      </svg>
+    </div>
+
+    <div class="about-inner">
+      <div class="about-grid">
+
+        <div class="about-label-col">
+          <span class="section-label">About</span>
+        </div>
+
+        <div class="about-content scroll-reveal">
+          <h2 class="about-headline">
+            A business has a soul.<br>
+            Most websites don&rsquo;t show it.
+          </h2>
+          <p class="about-body">
+            I&rsquo;m Chris Johnson. I design web presences for businesses that have something real
+            to say &mdash; built by people who care, who&rsquo;ve put their hands in the work, who deserve
+            to be seen the way they actually are, not the way a template decided they should look.
+          </p>
+          <p class="about-body">
+            Arensite is the act of seeing clearly, then showing what you saw.
+          </p>
+          <p class="about-body">
+            The process starts with a conversation. The kind where you do most of the talking.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- CONTACT                                                      -->
+  <!-- ============================================================ -->
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+
+      <div class="contact-label-col">
+        <span class="section-label contact-label-text">Begin</span>
+      </div>
+
+      <div class="contact-content scroll-reveal">
+        <h2 class="contact-headline">
+          Every doorway starts<br>with a conversation.
+        </h2>
+        <p class="contact-body">
+          Tell me what you&rsquo;re building. Where it&rsquo;s going.
+          What you want people to feel when they arrive.
+        </p>
+        <a class="contact-link" href="mailto:bcjoh26@gmail.com">
+          bcjoh26@gmail.com
+        </a>
+        <p class="contact-note">
+          No intake forms. No automated responses.<br>
+          Just a reply from me, usually within a day.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span class="footer-wordmark">Arensite</span>
+    <span class="footer-copy">&copy; 2026 Chris Johnson</span>
+  </footer>
+
+  <script src="main.js"></script>
 </body>
 </html>
