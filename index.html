@@ -13,7 +13,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
     /* ─── Reset ─────────────────────────────────────────── */
@@ -22,33 +22,30 @@
 
     /* ─── Tokens ─────────────────────────────────────────── */
     :root {
-      --bg:           #0A0D12;
-      --surface:      #111520;
-      --panel:        rgba(255,255,255,0.05);
-      --border:       rgba(255,255,255,0.08);
-      --accent:       #F0A500;
-      --accent-hover: #FFB820;
-      --accent-muted: rgba(240,165,0,0.15);
-      --text:         #EAE8E4;
-      --muted:        #7A7872;
-      --hint:         rgba(234,232,228,0.35);
-      --cta-text:     #0A0D12;
-      --max-w:        720px;
-      --gap:          clamp(4rem, 8vw, 7rem);
+      --bg:           #F8F6F1;
+      --surface:      #FFFFFF;
+      --panel:        #F0EDF5;
+      --border:       rgba(0,0,0,0.07);
+      --accent:       #D4890A;
+      --accent2:      rgba(212,137,10,0.09);
+      --text:         #1A1714;
+      --muted:        #8A8278;
+      --hint:         rgba(26,23,20,0.25);
+      --max-w:        900px;
     }
 
     /* ─── Base ─────────────────────────────────────────── */
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-      font-size: clamp(1rem, 1.5vw + 0.25rem, 1.125rem);
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      font-size: 1rem;
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
     }
 
     a { color: var(--accent); text-decoration: none; }
-    a:hover { color: var(--accent-hover); }
+    a:hover { color: #B5720A; }
 
     /* ─── Skip link ─────────────────────────────────────── */
     .skip-link {
@@ -56,66 +53,27 @@
       top: -100%;
       left: 1rem;
       background: var(--accent);
-      color: var(--cta-text);
+      color: #fff;
       padding: 0.5rem 1rem;
       border-radius: 4px;
-      font-weight: 600;
+      font-weight: 500;
       z-index: 999;
     }
     .skip-link:focus { top: 1rem; }
 
-    /* ─── Layout ─────────────────────────────────────────── */
-    .container {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 clamp(1.25rem, 5vw, 2.5rem);
-    }
-
-    section {
-      padding: var(--gap) 0;
-    }
-
-    hr.divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 0;
-    }
-
-    /* ─── Type scale ─────────────────────────────────────── */
-    h1 {
-      font-size: clamp(2.369rem, 5vw + 1rem, 3.157rem);
-      font-weight: 700;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-    }
-    h2 {
-      font-size: clamp(1.777rem, 3vw + 0.5rem, 2.369rem);
-      font-weight: 600;
-      line-height: 1.25;
-      letter-spacing: -0.01em;
-    }
-    h3 {
-      font-size: clamp(1.333rem, 2vw + 0.25rem, 1.777rem);
-      font-weight: 600;
-      line-height: 1.3;
-    }
-
-    /* ─── Header ─────────────────────────────────────────── */
+    /* ─── NAV ────────────────────────────────────────────── */
     header {
-      padding: 1.25rem 0;
       position: sticky;
       top: 0;
-      background: rgba(10,13,18,0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
       z-index: 100;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
     }
 
-    .header-inner {
+    nav {
       max-width: var(--max-w);
       margin: 0 auto;
-      padding: 0 clamp(1.25rem, 5vw, 2.5rem);
+      padding: 14px clamp(20px, 5vw, 40px);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -124,315 +82,561 @@
     .logo {
       display: flex;
       align-items: center;
-      gap: 0.625rem;
+      gap: 8px;
       text-decoration: none;
     }
 
-    .logo img {
-      width: 36px;
-      height: 36px;
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .logo-mark img {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
       object-fit: contain;
     }
 
     .logo-name {
-      font-size: 1.0625rem;
-      font-weight: 700;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 15px;
+      font-weight: 500;
       color: var(--text);
       letter-spacing: -0.01em;
     }
 
-    .header-cta {
+    .nav-cta {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 7px 16px;
+      min-height: 36px;
+      border-radius: 5px;
       background: var(--accent);
-      color: var(--cta-text);
-      font-size: 0.875rem;
-      font-weight: 700;
-      padding: 0.5rem 1.125rem;
-      border-radius: 8px;
-      min-height: 44px;
-      display: flex;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      transition: background 0.15s;
+      text-decoration: none;
+      display: inline-flex;
       align-items: center;
-      transition: background 0.15s ease;
     }
-    .header-cta:hover { background: var(--accent-hover); color: var(--cta-text); }
-    .header-cta:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 3px;
+    .nav-cta:hover { background: #B5720A; color: #fff; }
+    .nav-cta:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    /* ─── HERO ─────────────────────────────────────────── */
+    .hero {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: clamp(32px,6vw,52px) clamp(20px,5vw,40px) clamp(28px,5vw,40px);
     }
 
-    @media (max-width: 480px) {
-      .header-cta { font-size: 0.8125rem; padding: 0.5rem 0.875rem; }
-      .header-cta .cta-long { display: none; }
-      .header-cta .cta-short { display: inline; }
-    }
-    @media (min-width: 481px) {
-      .header-cta .cta-short { display: none; }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
     }
 
-    /* ─── Hero ─────────────────────────────────────────── */
-    #hero {
-      padding-top: clamp(4rem, 10vw, 8rem);
-      padding-bottom: clamp(4rem, 10vw, 8rem);
-      position: relative;
-      overflow: hidden;
+    @media (min-width: 700px) {
+      .hero-inner {
+        grid-template-columns: 1fr 340px;
+        gap: 40px;
+        align-items: start;
+      }
     }
 
-    .hero-glow {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -60%);
-      width: 600px;
-      height: 400px;
-      background: radial-gradient(ellipse at center, rgba(240,165,0,0.04) 0%, transparent 70%);
-      pointer-events: none;
+    .eyebrow {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
     }
 
-    #hero h1 {
-      margin-bottom: 1.5rem;
+    h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(22px, 4vw + 10px, 32px);
+      font-weight: 500;
+      line-height: 1.3;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--accent);
     }
 
     .hero-sub {
-      font-size: clamp(1.0625rem, 1.5vw + 0.25rem, 1.1875rem);
+      font-size: clamp(12px, 1.5vw + 6px, 14px);
+      line-height: 1.7;
       color: var(--muted);
-      max-width: 600px;
-      margin-bottom: 2.5rem;
+      margin-bottom: 22px;
+      max-width: 480px;
     }
 
-    /* ─── Buttons ─────────────────────────────────────── */
-    .btn {
+    .hero-btn {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      min-height: 48px;
-      padding: 0.75rem 1.75rem;
-      border-radius: 8px;
-      font-family: inherit;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      border: none;
-      transition: background 0.15s ease;
-    }
-
-    .btn-primary {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(10px, 1.5vw + 5px, 12px);
+      font-weight: 500;
+      padding: 11px 22px;
+      min-height: 44px;
+      border-radius: 6px;
       background: var(--accent);
-      color: var(--cta-text);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      transition: background 0.15s;
+      text-decoration: none;
     }
-    .btn-primary:hover { background: var(--accent-hover); color: var(--cta-text); }
-    .btn-primary:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 3px;
-    }
+    .hero-btn:hover { background: #B5720A; color: #fff; }
+    .hero-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
-    /* ─── Section labels ─────────────────────────────── */
-    .section-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      display: block;
-      margin-bottom: 1rem;
-    }
-
-    /* ─── Problem section ────────────────────────────── */
-    #problem .body-copy {
-      font-size: clamp(1.0625rem, 1.75vw + 0.25rem, 1.25rem);
-      line-height: 1.75;
-    }
-
-    #problem .body-copy p + p {
-      margin-top: 1.25rem;
-    }
-
-    /* ─── Work section ───────────────────────────────── */
-    #work h2 {
-      margin-bottom: 2.5rem;
-    }
-
-    .portfolio-grid {
-      display: grid;
-      gap: 1.5rem;
-    }
-
-    .portfolio-card {
+    /* desktop quick-intro card */
+    .hero-aside {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-      transition: box-shadow 0.2s ease;
-    }
-    .portfolio-card:hover {
-      box-shadow: 0 0 0 1px rgba(240,165,0,0.2), 0 8px 32px var(--accent-muted);
+      border-radius: 10px;
+      padding: 20px;
     }
 
-    .portfolio-card-img {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      object-fit: cover;
+    .hero-aside .section-label {
+      font-size: 9px;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
       display: block;
+    }
+
+    .hero-aside p {
+      font-size: 12px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .hero-aside p strong { color: var(--text); font-weight: 500; }
+
+    /* ─── TRUTH STRIP ────────────────────────────────────── */
+    .truth-strip {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+
+    .truth-strip-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 18px clamp(20px,5vw,40px);
+    }
+
+    .truth-block {
+      border-left: 2px solid var(--accent);
+      padding-left: 14px;
+    }
+
+    .truth-block p {
+      font-size: clamp(11px, 1.5vw + 5px, 13px);
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .truth-block p strong { color: var(--text); font-weight: 500; }
+
+    /* ─── SECTIONS ───────────────────────────────────────── */
+    .section {
+      border-top: 1px solid var(--border);
+    }
+
+    .section-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: clamp(24px,4vw,32px) clamp(20px,5vw,40px);
+    }
+
+    .section-label {
+      font-size: 9px;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      display: block;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(18px, 3vw + 8px, 24px);
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+      line-height: 1.3;
+    }
+
+    /* ─── PORTFOLIO CARDS ────────────────────────────────── */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    @media (min-width: 520px) {
+      .portfolio-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (min-width: 760px) {
+      .portfolio-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 16px;
+      }
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: box-shadow 0.15s, border-color 0.15s;
+    }
+    .card:hover {
+      box-shadow: 0 4px 20px rgba(212,137,10,0.1);
+      border-color: rgba(212,137,10,0.2);
+    }
+
+    .card-preview {
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    /* Placeholder slot */
+    .card-preview.slot {
+      background: var(--accent2);
+      border: 2px dashed rgba(212,137,10,0.25);
+    }
+    .slot-label { text-align: center; }
+    .slot-plus {
+      font-size: 22px;
+      color: var(--accent);
+      opacity: 0.5;
+      display: block;
+      margin-bottom: 4px;
+      line-height: 1;
+    }
+    .slot-text {
+      font-size: 9px;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      opacity: 0.8;
+    }
+
+    /* Cauldron Vintage mock */
+    .card-preview.cauldron {
+      background: #1C1410;
+    }
+    .cauldron-inner { text-align: center; }
+    .cauldron-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 14px;
+      color: #D4A96A;
+      letter-spacing: 0.05em;
+      margin-bottom: 3px;
+    }
+    .cauldron-city {
+      font-size: 8px;
+      color: rgba(212,169,106,0.5);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .cauldron-rule {
+      width: 32px;
+      height: 1px;
+      background: #D4A96A;
+      opacity: 0.4;
+      margin: 5px auto 0;
+    }
+
+    /* Colorize Studio mock */
+    .card-preview.colorize {
+      background: #F0EEF8;
+    }
+    .colorize-inner { text-align: center; }
+    .colorize-name {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #3D2B7A;
+      letter-spacing: -0.01em;
+      margin-bottom: 3px;
+    }
+    .colorize-tag {
+      font-size: 8px;
+      color: #7B62C4;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .colorize-dots { margin-top: 5px; }
+    .colorize-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #7B62C4;
+      opacity: 0.5;
+      display: inline-block;
+      margin: 0 2px;
+    }
+
+    .card-body { padding: 11px 14px; }
+
+    .card-name {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+
+    .card-type {
+      font-size: 9px;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .card-desc {
+      font-size: 10px;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+
+    /* ─── ABOUT ──────────────────────────────────────────── */
+    .about-section {
+      border-top: 1px solid var(--border);
       background: var(--panel);
     }
 
-    .portfolio-card-body {
-      padding: 1.5rem;
-    }
-
-    .portfolio-card-body h3 {
-      font-size: 1.25rem;
-      margin-bottom: 0.25rem;
-    }
-
-    .portfolio-card-meta {
-      font-size: 0.875rem;
-      color: var(--muted);
-      margin-bottom: 0.75rem;
-    }
-
-    .portfolio-card-body p {
-      font-size: 1rem;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .card-placeholder {
-      padding: 3rem 1.5rem;
-      text-align: center;
-      color: var(--hint);
-      font-size: 0.9375rem;
-    }
-
-    /* ─── About section ──────────────────────────────── */
-    #about h2 {
-      margin-bottom: 1.75rem;
-    }
-
-    #about p + p {
-      margin-top: 1.25rem;
-    }
-
-    /* ─── Contact section ────────────────────────────── */
-    #contact h2 {
-      margin-bottom: 0.75rem;
-    }
-
-    .contact-sub {
-      color: var(--muted);
-      margin-bottom: 2.5rem;
-    }
-
-    .contact-form {
+    .about-section .section-inner {
       display: grid;
-      gap: 1.75rem;
+      grid-template-columns: 1fr;
+      gap: 24px;
     }
 
-    .form-field {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
+    @media (min-width: 700px) {
+      .about-section .section-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: start;
+      }
     }
 
-    label {
-      font-size: 0.9375rem;
-      font-weight: 600;
-      color: var(--text);
+    .about-text {
+      font-size: clamp(11px, 1.5vw + 5px, 13px);
+      line-height: 1.75;
+      color: var(--muted);
+    }
+    .about-text strong { color: var(--text); font-weight: 500; }
+    .about-text p + p { margin-top: 12px; }
+
+    /* ─── CONTACT ────────────────────────────────────────── */
+    .contact-section {
+      border-top: 1px solid var(--border);
     }
 
-    input[type="text"],
-    input[type="email"],
-    input[type="tel"],
-    select,
-    textarea {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-bottom: 2px solid var(--border);
-      border-radius: 4px;
-      color: var(--text);
-      font-family: inherit;
-      font-size: 1rem;
-      padding: 0.75rem 1rem;
-      min-height: 48px;
+    .contact-section .section-inner {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    @media (min-width: 700px) {
+      .contact-section .section-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: start;
+      }
+    }
+
+    .contact-intro p {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+
+    .contact-note {
+      background: var(--bg);
+      border-left: 2px solid var(--accent);
+      padding: 10px 14px;
+      border-radius: 0 6px 6px 0;
+    }
+    .contact-note p {
+      font-size: 10px !important;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 0 !important;
+    }
+
+    /* ─── FORM ───────────────────────────────────────────── */
+    .form {
+      display: grid;
+      gap: 0;
+    }
+
+    .form-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 20px;
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 9px;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
       width: 100%;
-      transition: border-color 0.15s ease;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      padding: 6px 0;
+      font-size: 12px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      outline: none;
+      transition: border-color 0.15s;
       -webkit-appearance: none;
       appearance: none;
     }
 
-    select {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237A7872' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    .field select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%238A8278' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
-      background-position: right 1rem center;
-      background-color: var(--surface);
-      padding-right: 2.5rem;
+      background-position: right 0 center;
+      padding-right: 16px;
     }
 
-    textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-
-    input:focus-visible,
-    select:focus-visible,
-    textarea:focus-visible {
-      outline: none;
-      border-color: var(--border);
-      border-bottom-color: var(--accent);
-    }
-
-    input::placeholder,
-    textarea::placeholder {
-      color: var(--hint);
-    }
-
-    .form-note {
-      font-size: 0.875rem;
-      color: var(--muted);
+    .field textarea {
+      resize: none;
+      height: 52px;
       line-height: 1.5;
     }
 
-    .form-submit {
-      margin-top: 0.25rem;
+    .field input:focus-visible,
+    .field select:focus-visible,
+    .field textarea:focus-visible {
+      outline: none;
+      border-bottom-color: var(--accent);
     }
+
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color: var(--hint);
+    }
+
+    .field-note {
+      font-size: 9px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px;
+      min-height: 44px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      font-family: 'DM Sans', sans-serif;
+      margin-top: 8px;
+      transition: background 0.15s;
+    }
+    .submit-btn:hover { background: #B5720A; }
+    .submit-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
     .form-success {
       display: none;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-left: 3px solid var(--accent);
-      border-radius: 8px;
-      padding: 1.5rem;
-      font-size: 1.0625rem;
+      border-left: 2px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 16px;
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.6;
     }
 
     .form-error {
       display: none;
-      color: #e05252;
-      font-size: 0.9rem;
-      margin-top: 0.75rem;
+      color: #C0392B;
+      font-size: 11px;
+      margin-top: 8px;
     }
 
-    /* ─── Footer ─────────────────────────────────────── */
+    /* ─── FOOTER ─────────────────────────────────────────── */
     footer {
-      padding: 2rem 0;
       border-top: 1px solid var(--border);
+      background: var(--surface);
     }
 
-    .footer-inner {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 clamp(1.25rem, 5vw, 2.5rem);
-      color: var(--muted);
-      font-size: 0.875rem;
+    footer .section-inner {
+      text-align: center;
+      padding-top: 16px;
+      padding-bottom: 16px;
     }
 
-    footer a {
-      color: var(--muted);
+    .footer-text {
+      font-size: 10px;
+      color: var(--hint);
+      letter-spacing: 0.04em;
+    }
+
+    .footer-text a {
+      color: var(--hint);
       text-decoration: underline;
       text-underline-offset: 3px;
     }
-    footer a:hover { color: var(--text); }
+    .footer-text a:hover { color: var(--muted); }
 
-    /* ─── Reduced motion ─────────────────────────────── */
+    /* ─── Focus ──────────────────────────────────────────── */
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    /* ─── Reduced motion ─────────────────────────────────── */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -445,146 +649,183 @@
 
   <a href="#main" class="skip-link">Skip to main content</a>
 
-  <!-- HEADER -->
+  <!-- NAV -->
   <header>
-    <div class="header-inner">
+    <nav aria-label="Main navigation">
       <a href="#hero" class="logo" aria-label="Aren's Eye — home">
-        <img src="/assets/logo.png" alt="Aren's Eye logo" width="36" height="36">
+        <div class="logo-mark" id="logo-mark">
+          <!-- replaced by img if logo.png exists -->
+          <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <circle cx="6" cy="6" r="4" stroke="#fff" stroke-width="1.5"/>
+            <circle cx="6" cy="6" r="1.5" fill="#fff"/>
+          </svg>
+        </div>
         <span class="logo-name">Aren's Eye</span>
       </a>
-      <a href="#contact" class="header-cta"><span class="cta-long">Tell me about your business</span><span class="cta-short">Get in touch</span></a>
-    </div>
+      <a href="#contact" class="nav-cta">Let's talk</a>
+    </nav>
   </header>
 
   <main id="main">
 
     <!-- HERO -->
-    <section id="hero">
-      <div class="hero-glow" aria-hidden="true"></div>
-      <div class="container">
-        <h1>When someone searches for your business right now — what do they find?</h1>
-        <p class="hero-sub">Most local businesses in Allegany County don't have a website. The ones that do often have one that isn't working for them. I build simple, honest sites that show who you are and let people reach you.</p>
-        <a href="#contact" class="btn btn-primary">Tell me about your business</a>
-      </div>
-    </section>
-
-    <hr class="divider">
-
-    <!-- PROBLEM -->
-    <section id="problem" aria-labelledby="problem-heading">
-      <div class="container">
-        <div class="body-copy">
-          <p>Right now, if someone in Frostburg Googles your business, they probably find a Google Maps listing they didn't set up, a Yelp page they've never touched, and maybe a Facebook page they last updated six months ago.</p>
-          <p>That's not your fault. That's just the gap between where most local businesses are and where a simple website would take them.</p>
+    <section id="hero" aria-labelledby="hero-heading">
+      <div class="hero">
+        <div class="hero-inner">
+          <div>
+            <div class="eyebrow">Frostburg &amp; Allegany County, MD</div>
+            <h1 id="hero-heading">When someone searches for your business — <em>what do they find?</em></h1>
+            <p class="hero-sub">Most local businesses in Allegany County don't have a website. The ones that do often have one that isn't working for them. I build simple, honest sites that show who you are and let people reach you. No agency markup, no complicated contracts.</p>
+            <a href="#contact" class="hero-btn">Tell me about your business</a>
+          </div>
+          <aside class="hero-aside" aria-label="Quick intro">
+            <span class="section-label">Quick intro</span>
+            <p><strong>My wife and I just moved to Frostburg from Connecticut.</strong> We noticed a lot of great local businesses are basically invisible online. That's a solvable problem. So I'm solving it — one simple, honest site at a time.</p>
+          </aside>
         </div>
       </div>
     </section>
 
-    <hr class="divider">
+    <!-- TRUTH STRIP -->
+    <div class="truth-strip" role="note">
+      <div class="truth-strip-inner">
+        <div class="truth-block">
+          <p>Right now, if someone in Frostburg Googles your business, they probably find a Maps listing they didn't set up and a Yelp page they've never touched. <strong>That's the gap. A simple website fixes it.</strong></p>
+        </div>
+      </div>
+    </div>
 
     <!-- WORK -->
-    <section id="work" aria-labelledby="work-heading">
-      <div class="container">
-        <span class="section-label">Portfolio</span>
-        <h2 id="work-heading">What I've built</h2>
-
+    <section id="work" class="section" aria-labelledby="work-heading">
+      <div class="section-inner">
+        <span class="section-label">What I've built</span>
         <div class="portfolio-grid">
 
-          <article class="portfolio-card">
-            <img
-              src="/assets/wildmoor-preview.jpg"
-              alt="Wildmoor Botanicals website on a laptop"
-              class="portfolio-card-img"
-              loading="lazy"
-              onerror="this.style.display='none'"
-            >
-            <div class="portfolio-card-body">
-              <h3>Wildmoor Botanicals</h3>
-              <p class="portfolio-card-meta">Herb shop &amp; apothecary — Frostburg, MD</p>
-              <p>Before: people searching for them found nothing. Now they find a clean site that tells them who they are, what they offer, and how to get in touch.</p>
+          <!-- Placeholder slot -->
+          <article class="card">
+            <div class="card-preview slot" role="img" aria-label="Your business — first client slot">
+              <div class="slot-label">
+                <span class="slot-plus" aria-hidden="true">+</span>
+                <span class="slot-text">Your site here</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-name">Your Business</div>
+              <div class="card-type">First client · Coming soon</div>
+              <div class="card-desc">A real site for a real local business in Frostburg. This spot belongs to whoever moves first.</div>
             </div>
           </article>
 
-          <article class="portfolio-card">
-            <div class="card-placeholder">
-              <p>More work coming soon.</p>
+          <!-- Cauldron Vintage (mock) -->
+          <article class="card">
+            <div class="card-preview cauldron" role="img" aria-label="Cauldron Vintage website preview">
+              <div class="cauldron-inner">
+                <div class="cauldron-name">Cauldron Vintage</div>
+                <div class="cauldron-city">Frostburg, MD</div>
+                <div class="cauldron-rule"></div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-name">Cauldron Vintage</div>
+              <div class="card-type">Vintage retail &middot; Mock site</div>
+              <div class="card-desc">Before: Facebook only, hard to find. After: a site that shows the vibe before you walk in.</div>
+            </div>
+          </article>
+
+          <!-- Colorize Studio (mock) -->
+          <article class="card">
+            <div class="card-preview colorize" role="img" aria-label="Colorize Studio website preview">
+              <div class="colorize-inner">
+                <div class="colorize-name">Colorize Studio</div>
+                <div class="colorize-tag">Hair &middot; Nails &middot; Color</div>
+                <div class="colorize-dots" aria-hidden="true">
+                  <span class="colorize-dot"></span>
+                  <span class="colorize-dot"></span>
+                  <span class="colorize-dot"></span>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-name">Colorize Studio</div>
+              <div class="card-type">Salon &middot; Mock site</div>
+              <div class="card-desc">Before: managing bookings through DMs and phone calls. After: a contact form that works while they sleep.</div>
             </div>
           </article>
 
         </div>
       </div>
     </section>
-
-    <hr class="divider">
 
     <!-- ABOUT -->
-    <section id="about" aria-labelledby="about-heading">
-      <div class="container">
-        <span class="section-label">About</span>
-        <h2 id="about-heading">Who's building this</h2>
-        <p>My wife and I just moved to Frostburg from Connecticut and have been getting to know the area. One thing we noticed pretty quickly: a lot of great local businesses here are basically invisible online. Not because they're not worth finding — but because nobody's given them a simple, affordable way to show up.</p>
-        <p>That's a solvable problem. So I'm solving it.</p>
-        <p>I build clean, simple websites for local businesses. Something that shows who you are, what you do, and gives people a way to reach you. No agency markup, no complicated contracts, no features you don't need. Just a site that works.</p>
+    <section id="about" class="about-section" aria-labelledby="about-heading">
+      <div class="section-inner">
+        <div>
+          <span class="section-label">Who's building this</span>
+          <div class="about-text">
+            <p><strong>My wife and I just moved to Frostburg from Connecticut and have been getting to know the area.</strong> One thing we noticed pretty quickly: a lot of great local businesses here are basically invisible online. Not because they're not worth finding — but because nobody's given them a simple, affordable way to show up.</p>
+            <p>That's a solvable problem. So I'm solving it.</p>
+            <p>I build clean, simple websites for local businesses. Something that shows who you are, what you do, and gives people a way to reach you. No agency markup, no complicated contracts, no features you don't need. Just a site that works.</p>
+          </div>
+        </div>
+        <div></div>
       </div>
     </section>
 
-    <hr class="divider">
-
     <!-- CONTACT -->
-    <section id="contact" aria-labelledby="contact-heading">
-      <div class="container">
-        <span class="section-label">Contact</span>
-        <h2 id="contact-heading">Let's talk about your business</h2>
-        <p class="contact-sub">Fill this out and I'll get back to you within 24 hours. No pitch, no pressure — just a conversation about whether this makes sense for you.</p>
+    <section id="contact" class="contact-section" aria-labelledby="contact-heading">
+      <div class="section-inner">
 
-        <div id="form-success" class="form-success" role="alert" aria-live="polite">
-          Got it. I'll be in touch within 24 hours. — Chris
+        <div class="contact-intro">
+          <span class="section-label">Let's talk about your business</span>
+          <p>Fill this out and I'll get back to you within 24 hours. No pitch, no pressure — just a conversation about whether this makes sense for you.</p>
+          <div class="contact-note">
+            <p>Most people who fill this out have never had a website. That's completely fine. I'll walk you through everything.</p>
+          </div>
         </div>
 
-        <form id="contact-form" class="contact-form" novalidate>
-
-          <div class="form-field">
-            <label for="name">Your name</label>
-            <input type="text" id="name" name="name" autocomplete="name" required>
+        <div>
+          <div id="form-success" class="form-success" role="alert" aria-live="polite">
+            Got it. I'll be in touch within 24 hours. — Chris
           </div>
 
-          <div class="form-field">
-            <label for="businessName">Business name</label>
-            <input type="text" id="businessName" name="businessName" required>
-          </div>
-
-          <div class="form-field">
-            <label for="businessType">What kind of business?</label>
-            <input type="text" id="businessType" name="businessType" placeholder="e.g. salon, restaurant, contractor..." required>
-          </div>
-
-          <div class="form-field">
-            <label for="hasWebsite">Do you currently have a website?</label>
-            <select id="hasWebsite" name="hasWebsite" required>
-              <option value="" disabled selected></option>
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
-              <option value="needs-work">I think so but it needs work</option>
-            </select>
-          </div>
-
-          <div class="form-field">
-            <label for="wishPeopleKnew">What's the one thing you wish more people knew about your business?</label>
-            <textarea id="wishPeopleKnew" name="wishPeopleKnew" rows="4" required></textarea>
-            <p class="form-note">This helps me understand what matters most to you before we talk.</p>
-          </div>
-
-          <div class="form-field">
-            <label for="contact">Best way to reach you</label>
-            <input type="text" id="contact" name="contact" placeholder="Email or phone — your choice" autocomplete="email" required>
-          </div>
-
-          <div class="form-submit">
-            <button type="submit" class="btn btn-primary" id="submit-btn">Send it over</button>
+          <form id="contact-form" class="form" novalidate>
+            <div class="form-2col">
+              <div class="field">
+                <label for="name">Your name</label>
+                <input type="text" id="name" name="name" placeholder="Michelle" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="businessName">Business name</label>
+                <input type="text" id="businessName" name="businessName" placeholder="Cauldron Vintage" required>
+              </div>
+              <div class="field">
+                <label for="businessType">Type of business</label>
+                <input type="text" id="businessType" name="businessType" placeholder="Vintage shop, salon..." required>
+              </div>
+              <div class="field">
+                <label for="hasWebsite">Do you have a website?</label>
+                <select id="hasWebsite" name="hasWebsite" required>
+                  <option value="" disabled selected></option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                  <option value="needs-work">Needs work</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="wishPeopleKnew">What do you wish more people knew about your business?</label>
+              <textarea id="wishPeopleKnew" name="wishPeopleKnew" placeholder="Tell me anything — this helps me understand what we'd build." required></textarea>
+              <p class="field-note">This helps me understand what matters most to you before we talk.</p>
+            </div>
+            <div class="field">
+              <label for="contact">Best way to reach you</label>
+              <input type="text" id="contact" name="contact" placeholder="Email or phone" autocomplete="email" required>
+            </div>
+            <button type="submit" class="submit-btn" id="submit-btn">Send it over</button>
             <p id="form-error" class="form-error" role="alert" aria-live="polite"></p>
-          </div>
+          </form>
+        </div>
 
-        </form>
       </div>
     </section>
 
@@ -592,23 +833,41 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-inner">
-      Chris Johnson &mdash; Frostburg, MD &mdash; <a href="mailto:bcjoh26@gmail.com">bcjoh26@gmail.com</a>
+    <div class="section-inner">
+      <p class="footer-text">Chris Johnson &middot; Frostburg, MD &middot; <a href="mailto:bcjoh26@gmail.com">bcjoh26@gmail.com</a></p>
     </div>
   </footer>
 
   <script>
     (function () {
-      const form      = document.getElementById('contact-form');
-      const success   = document.getElementById('form-success');
-      const errorEl   = document.getElementById('form-error');
-      const submitBtn = document.getElementById('submit-btn');
+      // swap logo mark for real image if assets/logo.png loads
+      var logoImg = new Image();
+      logoImg.onload = function () {
+        var mark = document.getElementById('logo-mark');
+        if (mark) {
+          mark.innerHTML = '';
+          mark.style.background = 'transparent';
+          var img = document.createElement('img');
+          img.src = '/assets/logo.png';
+          img.alt = '';
+          img.width = 28;
+          img.height = 28;
+          mark.appendChild(img);
+        }
+      };
+      logoImg.src = '/assets/logo.png';
+
+      // form
+      var form      = document.getElementById('contact-form');
+      var success   = document.getElementById('form-success');
+      var errorEl   = document.getElementById('form-error');
+      var submitBtn = document.getElementById('submit-btn');
 
       form.addEventListener('submit', async function (e) {
         e.preventDefault();
         errorEl.style.display = 'none';
 
-        const fields = ['name','businessName','businessType','hasWebsite','wishPeopleKnew','contact'];
+        var fields = ['name','businessName','businessType','hasWebsite','wishPeopleKnew','contact'];
         for (var i = 0; i < fields.length; i++) {
           var el = form.elements[fields[i]];
           if (!el.value.trim()) {
