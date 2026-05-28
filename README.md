@@ -9,10 +9,11 @@ Every site built here starts with art direction, not templates.
 ## Mock Sites
 
 - [Wildmoor Botanicals](./mock-sites/nettle-patch/) — Herb shop & apothecary
+- [Blackthorn Ink](./mock-sites/independent-ink/) — Tattoo studio, Frostburg MD
 
 ## Client Work
 
-*Live client sites will be listed here as they launch.*
+- Derek & Apple Photography — Live client site
 
 ---
 

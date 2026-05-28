@@ -329,80 +329,83 @@
       overflow: hidden;
     }
 
-    /* Placeholder slot */
-    .card-preview.slot {
-      background: var(--accent2);
-      border: 2px dashed rgba(212,137,10,0.25);
+    /* Derek & Apple Photography (real client) */
+    .card-preview.derek {
+      background: #0D0B09;
     }
-    .slot-label { text-align: center; }
-    .slot-plus {
-      font-size: 22px;
-      color: var(--accent);
-      opacity: 0.5;
-      display: block;
-      margin-bottom: 4px;
-      line-height: 1;
-    }
-    .slot-text {
-      font-size: 9px;
-      color: var(--accent);
-      letter-spacing: 0.06em;
-      opacity: 0.8;
-    }
-
-    /* Cauldron Vintage mock */
-    .card-preview.cauldron {
-      background: #1C1410;
-    }
-    .cauldron-inner { text-align: center; }
-    .cauldron-name {
+    .derek-inner { text-align: center; }
+    .derek-name {
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: 14px;
-      color: #D4A96A;
-      letter-spacing: 0.05em;
+      font-size: 13px;
+      font-weight: 400;
+      color: #E8DCCB;
+      letter-spacing: 0.06em;
       margin-bottom: 3px;
     }
-    .cauldron-city {
+    .derek-tag {
       font-size: 8px;
-      color: rgba(212,169,106,0.5);
+      color: rgba(232,220,203,0.45);
       letter-spacing: 0.1em;
       text-transform: uppercase;
     }
-    .cauldron-rule {
-      width: 32px;
+    .derek-rule {
+      width: 28px;
       height: 1px;
-      background: #D4A96A;
-      opacity: 0.4;
+      background: rgba(232,220,203,0.3);
       margin: 5px auto 0;
     }
 
-    /* Colorize Studio mock */
-    .card-preview.colorize {
-      background: #F0EEF8;
+    /* Wildmoor Botanicals mock */
+    .card-preview.wildmoor {
+      background: #2A3524;
     }
-    .colorize-inner { text-align: center; }
-    .colorize-name {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      color: #3D2B7A;
-      letter-spacing: -0.01em;
+    .wildmoor-inner { text-align: center; }
+    .wildmoor-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 13px;
+      font-weight: 400;
+      color: #C8D8A8;
+      letter-spacing: 0.04em;
       margin-bottom: 3px;
     }
-    .colorize-tag {
+    .wildmoor-tag {
       font-size: 8px;
-      color: #7B62C4;
-      letter-spacing: 0.06em;
+      color: rgba(200,216,168,0.5);
+      letter-spacing: 0.1em;
       text-transform: uppercase;
     }
-    .colorize-dots { margin-top: 5px; }
-    .colorize-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: #7B62C4;
-      opacity: 0.5;
-      display: inline-block;
-      margin: 0 2px;
+    .wildmoor-rule {
+      width: 28px;
+      height: 1px;
+      background: rgba(200,216,168,0.3);
+      margin: 5px auto 0;
+    }
+
+    /* Blackthorn Ink mock */
+    .card-preview.blackthorn {
+      background: #0E0C0A;
+    }
+    .blackthorn-inner { text-align: center; }
+    .blackthorn-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 13px;
+      font-weight: 400;
+      color: #F2EBE0;
+      letter-spacing: 0.05em;
+      margin-bottom: 3px;
+    }
+    .blackthorn-tag {
+      font-size: 8px;
+      color: rgba(242,235,224,0.4);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .blackthorn-rule {
+      width: 28px;
+      height: 1px;
+      background: #8B1A1A;
+      opacity: 0.6;
+      margin: 5px auto 0;
     }
 
     .card-body { padding: 11px 14px; }
@@ -701,54 +704,51 @@
         <span class="section-label">What I've built</span>
         <div class="portfolio-grid">
 
-          <!-- Placeholder slot -->
+          <!-- Derek & Apple Photography (real client) -->
           <article class="card">
-            <div class="card-preview slot" role="img" aria-label="Your business — first client slot">
-              <div class="slot-label">
-                <span class="slot-plus" aria-hidden="true">+</span>
-                <span class="slot-text">Your site here</span>
+            <div class="card-preview derek" role="img" aria-label="Derek and Apple Photography website preview">
+              <div class="derek-inner">
+                <div class="derek-name">Derek &amp; Apple</div>
+                <div class="derek-tag">Photography</div>
+                <div class="derek-rule"></div>
               </div>
             </div>
             <div class="card-body">
-              <div class="card-name">Your Business</div>
-              <div class="card-type">First client · Coming soon</div>
-              <div class="card-desc">A real site for a real local business in Frostburg. This spot belongs to whoever moves first.</div>
+              <div class="card-name">Derek &amp; Apple Photography</div>
+              <div class="card-type">Photography &middot; Client site</div>
+              <div class="card-desc">Before: a portfolio scattered across social media. After: one clean site that shows their work and lets people reach them.</div>
             </div>
           </article>
 
-          <!-- Cauldron Vintage (mock) -->
+          <!-- Wildmoor Botanicals (mock) -->
           <article class="card">
-            <div class="card-preview cauldron" role="img" aria-label="Cauldron Vintage website preview">
-              <div class="cauldron-inner">
-                <div class="cauldron-name">Cauldron Vintage</div>
-                <div class="cauldron-city">Frostburg, MD</div>
-                <div class="cauldron-rule"></div>
+            <div class="card-preview wildmoor" role="img" aria-label="Wildmoor Botanicals website preview">
+              <div class="wildmoor-inner">
+                <div class="wildmoor-name">Wildmoor Botanicals</div>
+                <div class="wildmoor-tag">Herb shop &middot; Apothecary</div>
+                <div class="wildmoor-rule"></div>
               </div>
             </div>
             <div class="card-body">
-              <div class="card-name">Cauldron Vintage</div>
-              <div class="card-type">Vintage retail &middot; Mock site</div>
-              <div class="card-desc">Before: Facebook only, hard to find. After: a site that shows the vibe before you walk in.</div>
+              <div class="card-name">Wildmoor Botanicals</div>
+              <div class="card-type">Herb shop &middot; Mock site</div>
+              <div class="card-desc">Before: no web presence at all. After: a site that tells the story of the shop and brings people through the door.</div>
             </div>
           </article>
 
-          <!-- Colorize Studio (mock) -->
+          <!-- Blackthorn Ink (mock) -->
           <article class="card">
-            <div class="card-preview colorize" role="img" aria-label="Colorize Studio website preview">
-              <div class="colorize-inner">
-                <div class="colorize-name">Colorize Studio</div>
-                <div class="colorize-tag">Hair &middot; Nails &middot; Color</div>
-                <div class="colorize-dots" aria-hidden="true">
-                  <span class="colorize-dot"></span>
-                  <span class="colorize-dot"></span>
-                  <span class="colorize-dot"></span>
-                </div>
+            <div class="card-preview blackthorn" role="img" aria-label="Blackthorn Ink website preview">
+              <div class="blackthorn-inner">
+                <div class="blackthorn-name">Blackthorn Ink</div>
+                <div class="blackthorn-tag">Tattoo &middot; Frostburg, MD</div>
+                <div class="blackthorn-rule"></div>
               </div>
             </div>
             <div class="card-body">
-              <div class="card-name">Colorize Studio</div>
-              <div class="card-type">Salon &middot; Mock site</div>
-              <div class="card-desc">Before: managing bookings through DMs and phone calls. After: a contact form that works while they sleep.</div>
+              <div class="card-name">Blackthorn Ink</div>
+              <div class="card-type">Tattoo studio &middot; Mock site</div>
+              <div class="card-desc">Before: word of mouth only. After: a site that shows the artist's work and tells people where to find them.</div>
             </div>
           </article>
 
