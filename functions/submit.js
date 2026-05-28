@@ -14,7 +14,7 @@ export async function onRequestPost(context) {
     return json({ error: 'Missing fields' }, 400);
   }
 
-  const resendKey = env.RESEND_API_KEY;
+  const resendKey = env.ARENSITE_RESEND_API_KEY;
   if (!resendKey) {
     console.error('RESEND_API_KEY not set');
     return json({ error: 'Server misconfigured' }, 500);
@@ -65,7 +65,7 @@ P.S. If you want to grab a time now: [CALENDLY LINK]`;
     return json({ success: true }, 200);
   } catch (err) {
     console.error('Email error:', err.message);
-    return json({ error: 'Email failed' }, 500);
+    return json({ error: 'Email failed', detail: err.message }, 500);
   }
 }
 
