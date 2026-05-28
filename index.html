@@ -760,20 +760,20 @@
           <form id="contact-form" class="form" novalidate>
             <div class="form-2col">
               <div class="field">
-                <label for="name">Your name</label>
-                <input type="text" id="name" name="name" placeholder="Michelle" autocomplete="name" required>
+                <label for="field-name">Your name</label>
+                <input type="text" id="field-name" name="name" placeholder="Michelle" autocomplete="name" required>
               </div>
               <div class="field">
-                <label for="businessName">Business name</label>
-                <input type="text" id="businessName" name="businessName" placeholder="Cauldron Vintage" required>
+                <label for="field-business-name">Business name</label>
+                <input type="text" id="field-business-name" name="businessName" placeholder="Cauldron Vintage" autocomplete="organization" required>
               </div>
               <div class="field">
-                <label for="businessType">Type of business</label>
-                <input type="text" id="businessType" name="businessType" placeholder="Vintage shop, salon..." required>
+                <label for="field-business-type">Type of business</label>
+                <input type="text" id="field-business-type" name="businessType" placeholder="Vintage shop, salon..." autocomplete="off" required>
               </div>
               <div class="field">
-                <label for="hasWebsite">Do you have a website?</label>
-                <select id="hasWebsite" name="hasWebsite" required>
+                <label for="field-has-website">Do you have a website?</label>
+                <select id="field-has-website" name="hasWebsite" autocomplete="off" required>
                   <option value="" disabled selected></option>
                   <option value="yes">Yes</option>
                   <option value="no">No</option>
@@ -782,13 +782,13 @@
               </div>
             </div>
             <div class="field">
-              <label for="wishPeopleKnew">What do you wish more people knew about your business?</label>
-              <textarea id="wishPeopleKnew" name="wishPeopleKnew" placeholder="Tell me anything — this helps me understand what we'd build." required></textarea>
+              <label for="field-wish">What do you wish more people knew about your business?</label>
+              <textarea id="field-wish" name="wishPeopleKnew" placeholder="Tell me anything — this helps me understand what we'd build." autocomplete="off" required></textarea>
               <p class="field-note">This helps me understand what matters most to you before we talk.</p>
             </div>
             <div class="field">
-              <label for="contact">Best way to reach you</label>
-              <input type="text" id="contact" name="contact" placeholder="Email or phone" autocomplete="email" required>
+              <label for="field-contact">Best way to reach you</label>
+              <input type="text" id="field-contact" name="contact" placeholder="Email or phone" autocomplete="email" required>
             </div>
             <button type="submit" class="submit-btn" id="submit-btn">Send it over</button>
             <p id="form-error" class="form-error" role="alert" aria-live="polite"></p>
