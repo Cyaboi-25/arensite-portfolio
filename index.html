@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aren's Eye — Web Design for Local Businesses</title>
+  <title>Arensite — Web Design for Local Businesses</title>
   <meta name="description" content="Simple, honest websites for local businesses in Frostburg and Allegany County, MD. Built by Chris Johnson.">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Aren's Eye — Web Design for Local Businesses">
+  <meta property="og:title" content="Arensite — Web Design for Local Businesses">
   <meta property="og:description" content="Most local businesses are invisible online. We fix that honestly.">
   <meta property="og:url" content="https://arensite.pages.dev">
 
@@ -309,103 +309,75 @@
     }
 
     .card {
+      display: block;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 10px;
       overflow: hidden;
-      transition: box-shadow 0.15s, border-color 0.15s;
+      transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
+      text-decoration: none;
+      color: inherit;
     }
     .card:hover {
-      box-shadow: 0 4px 20px rgba(212,137,10,0.1);
-      border-color: rgba(212,137,10,0.2);
+      box-shadow: 0 6px 24px rgba(212,137,10,0.13);
+      border-color: rgba(212,137,10,0.25);
+      transform: translateY(-2px);
+    }
+    .card:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
     }
 
+    /* iframe preview panel */
     .card-preview {
-      height: 90px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-bottom: 1px solid var(--border);
+      height: 130px;
+      position: relative;
       overflow: hidden;
+      border-bottom: 1px solid var(--border);
+      background: #111;
     }
 
-    /* Derek & Apple Photography (real client) */
-    .card-preview.derek {
-      background: #0D0B09;
+    .card-preview iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1200px;
+      height: 900px;
+      border: none;
+      transform: scale(0.22);
+      transform-origin: top left;
+      pointer-events: none;
     }
-    .derek-inner { text-align: center; }
-    .derek-name {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 13px;
-      font-weight: 400;
-      color: #E8DCCB;
+
+    /* "View site" overlay on hover */
+    .card-preview-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0);
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding: 8px;
+      transition: background 0.2s;
+    }
+    .card:hover .card-preview-overlay {
+      background: rgba(0,0,0,0.18);
+    }
+    .card-preview-label {
+      font-size: 9px;
+      font-weight: 500;
       letter-spacing: 0.06em;
-      margin-bottom: 3px;
+      color: #fff;
+      background: var(--accent);
+      padding: 3px 8px;
+      border-radius: 3px;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.2s, transform 0.2s;
     }
-    .derek-tag {
-      font-size: 8px;
-      color: rgba(232,220,203,0.45);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-    .derek-rule {
-      width: 28px;
-      height: 1px;
-      background: rgba(232,220,203,0.3);
-      margin: 5px auto 0;
-    }
-
-    /* Wildmoor Botanicals mock */
-    .card-preview.wildmoor {
-      background: #2A3524;
-    }
-    .wildmoor-inner { text-align: center; }
-    .wildmoor-name {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 13px;
-      font-weight: 400;
-      color: #C8D8A8;
-      letter-spacing: 0.04em;
-      margin-bottom: 3px;
-    }
-    .wildmoor-tag {
-      font-size: 8px;
-      color: rgba(200,216,168,0.5);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-    .wildmoor-rule {
-      width: 28px;
-      height: 1px;
-      background: rgba(200,216,168,0.3);
-      margin: 5px auto 0;
-    }
-
-    /* Blackthorn Ink mock */
-    .card-preview.blackthorn {
-      background: #0E0C0A;
-    }
-    .blackthorn-inner { text-align: center; }
-    .blackthorn-name {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 13px;
-      font-weight: 400;
-      color: #F2EBE0;
-      letter-spacing: 0.05em;
-      margin-bottom: 3px;
-    }
-    .blackthorn-tag {
-      font-size: 8px;
-      color: rgba(242,235,224,0.4);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-    .blackthorn-rule {
-      width: 28px;
-      height: 1px;
-      background: #8B1A1A;
-      opacity: 0.6;
-      margin: 5px auto 0;
+    .card:hover .card-preview-label {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .card-body { padding: 11px 14px; }
@@ -655,7 +627,7 @@
   <!-- NAV -->
   <header>
     <nav aria-label="Main navigation">
-      <a href="#hero" class="logo" aria-label="Aren's Eye — home">
+      <a href="#hero" class="logo" aria-label="Arensite — home">
         <div class="logo-mark" id="logo-mark">
           <!-- replaced by img if logo.png exists -->
           <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true">
@@ -663,7 +635,7 @@
             <circle cx="6" cy="6" r="1.5" fill="#fff"/>
           </svg>
         </div>
-        <span class="logo-name">Aren's Eye</span>
+        <span class="logo-name">Arensite</span>
       </a>
       <a href="#contact" class="nav-cta">Let's talk</a>
     </nav>
@@ -705,12 +677,11 @@
         <div class="portfolio-grid">
 
           <!-- Derek & Apple Photography (real client) -->
-          <article class="card">
-            <div class="card-preview derek" role="img" aria-label="Derek and Apple Photography website preview">
-              <div class="derek-inner">
-                <div class="derek-name">Derek &amp; Apple</div>
-                <div class="derek-tag">Photography</div>
-                <div class="derek-rule"></div>
+          <a class="card" href="https://derekandapple.com" target="_blank" rel="noopener" aria-label="Visit Derek and Apple Photography — opens in new tab">
+            <div class="card-preview">
+              <iframe src="https://derekandapple.com" title="Derek and Apple Photography" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>
+              <div class="card-preview-overlay">
+                <span class="card-preview-label">View site →</span>
               </div>
             </div>
             <div class="card-body">
@@ -718,15 +689,14 @@
               <div class="card-type">Photography &middot; Client site</div>
               <div class="card-desc">Before: a portfolio scattered across social media. After: one clean site that shows their work and lets people reach them.</div>
             </div>
-          </article>
+          </a>
 
           <!-- Wildmoor Botanicals (mock) -->
-          <article class="card">
-            <div class="card-preview wildmoor" role="img" aria-label="Wildmoor Botanicals website preview">
-              <div class="wildmoor-inner">
-                <div class="wildmoor-name">Wildmoor Botanicals</div>
-                <div class="wildmoor-tag">Herb shop &middot; Apothecary</div>
-                <div class="wildmoor-rule"></div>
+          <a class="card" href="/mock-sites/nettle-patch/" target="_blank" rel="noopener" aria-label="Visit Wildmoor Botanicals mock site — opens in new tab">
+            <div class="card-preview">
+              <iframe src="/mock-sites/nettle-patch/" title="Wildmoor Botanicals" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>
+              <div class="card-preview-overlay">
+                <span class="card-preview-label">View site →</span>
               </div>
             </div>
             <div class="card-body">
@@ -734,15 +704,14 @@
               <div class="card-type">Herb shop &middot; Mock site</div>
               <div class="card-desc">Before: no web presence at all. After: a site that tells the story of the shop and brings people through the door.</div>
             </div>
-          </article>
+          </a>
 
           <!-- Blackthorn Ink (mock) -->
-          <article class="card">
-            <div class="card-preview blackthorn" role="img" aria-label="Blackthorn Ink website preview">
-              <div class="blackthorn-inner">
-                <div class="blackthorn-name">Blackthorn Ink</div>
-                <div class="blackthorn-tag">Tattoo &middot; Frostburg, MD</div>
-                <div class="blackthorn-rule"></div>
+          <a class="card" href="/mock-sites/independent-ink/" target="_blank" rel="noopener" aria-label="Visit Blackthorn Ink mock site — opens in new tab">
+            <div class="card-preview">
+              <iframe src="/mock-sites/independent-ink/" title="Blackthorn Ink" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>
+              <div class="card-preview-overlay">
+                <span class="card-preview-label">View site →</span>
               </div>
             </div>
             <div class="card-body">
@@ -750,7 +719,7 @@
               <div class="card-type">Tattoo studio &middot; Mock site</div>
               <div class="card-desc">Before: word of mouth only. After: a site that shows the artist's work and tells people where to find them.</div>
             </div>
-          </article>
+          </a>
 
         </div>
       </div>
