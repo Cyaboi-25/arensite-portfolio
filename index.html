@@ -3,261 +3,653 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arensite — Web Design by Chris Johnson</title>
-  <meta name="description" content="I build doorways — into who you are, what your business means, and how you deserve to be seen. Web design by Chris Johnson.">
+  <title>Aren's Eye — Web Design for Local Businesses</title>
+  <meta name="description" content="Simple, honest websites for local businesses in Frostburg and Allegany County, MD. Built by Chris Johnson.">
 
-  <!-- Open Graph -->
-  <meta property="og:type"        content="website">
-  <meta property="og:title"       content="Arensite — Web Design by Chris Johnson">
-  <meta property="og:description" content="I build doorways — into who you are, what your business means, and how you deserve to be seen.">
-  <meta property="og:url"         content="https://arensite.pages.dev">
-  <meta property="og:image"       content="https://arensite.pages.dev/og-image.png">
-
-  <!-- Twitter / X -->
-  <meta name="twitter:card"        content="summary_large_image">
-  <meta name="twitter:title"       content="Arensite — Web Design by Chris Johnson">
-  <meta name="twitter:description" content="I build doorways — into who you are, what your business means, and how you deserve to be seen.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Aren's Eye — Web Design for Local Businesses">
+  <meta property="og:description" content="Most local businesses are invisible online. We fix that honestly.">
+  <meta property="og:url" content="https://arensite.pages.dev">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── Reset ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ─── Tokens ─────────────────────────────────────────── */
+    :root {
+      --bg:           #0A0D12;
+      --surface:      #111520;
+      --panel:        rgba(255,255,255,0.05);
+      --border:       rgba(255,255,255,0.08);
+      --accent:       #F0A500;
+      --accent-hover: #FFB820;
+      --accent-muted: rgba(240,165,0,0.15);
+      --text:         #EAE8E4;
+      --muted:        #7A7872;
+      --hint:         rgba(234,232,228,0.35);
+      --cta-text:     #0A0D12;
+      --max-w:        720px;
+      --gap:          clamp(4rem, 8vw, 7rem);
+    }
+
+    /* ─── Base ─────────────────────────────────────────── */
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      font-size: clamp(1rem, 1.5vw + 0.25rem, 1.125rem);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-hover); }
+
+    /* ─── Skip link ─────────────────────────────────────── */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      background: var(--accent);
+      color: var(--cta-text);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-weight: 600;
+      z-index: 999;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    /* ─── Layout ─────────────────────────────────────────── */
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 5vw, 2.5rem);
+    }
+
+    section {
+      padding: var(--gap) 0;
+    }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    /* ─── Type scale ─────────────────────────────────────── */
+    h1 {
+      font-size: clamp(2.369rem, 5vw + 1rem, 3.157rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+    h2 {
+      font-size: clamp(1.777rem, 3vw + 0.5rem, 2.369rem);
+      font-weight: 600;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+    h3 {
+      font-size: clamp(1.333rem, 2vw + 0.25rem, 1.777rem);
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    /* ─── Header ─────────────────────────────────────────── */
+    header {
+      padding: 1.25rem 0;
+      position: sticky;
+      top: 0;
+      background: rgba(10,13,18,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+    }
+
+    .header-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 5vw, 2.5rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      text-decoration: none;
+    }
+
+    .logo img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+    }
+
+    .logo-name {
+      font-size: 1.0625rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .header-cta {
+      background: var(--accent);
+      color: var(--cta-text);
+      font-size: 0.875rem;
+      font-weight: 700;
+      padding: 0.5rem 1.125rem;
+      border-radius: 8px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      transition: background 0.15s ease;
+    }
+    .header-cta:hover { background: var(--accent-hover); color: var(--cta-text); }
+    .header-cta:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 480px) {
+      .header-cta { font-size: 0.8125rem; padding: 0.5rem 0.875rem; }
+      .header-cta .cta-long { display: none; }
+      .header-cta .cta-short { display: inline; }
+    }
+    @media (min-width: 481px) {
+      .header-cta .cta-short { display: none; }
+    }
+
+    /* ─── Hero ─────────────────────────────────────────── */
+    #hero {
+      padding-top: clamp(4rem, 10vw, 8rem);
+      padding-bottom: clamp(4rem, 10vw, 8rem);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -60%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse at center, rgba(240,165,0,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    #hero h1 {
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-sub {
+      font-size: clamp(1.0625rem, 1.5vw + 0.25rem, 1.1875rem);
+      color: var(--muted);
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ─── Buttons ─────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0.75rem 1.75rem;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: background 0.15s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--cta-text);
+    }
+    .btn-primary:hover { background: var(--accent-hover); color: var(--cta-text); }
+    .btn-primary:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    /* ─── Section labels ─────────────────────────────── */
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    /* ─── Problem section ────────────────────────────── */
+    #problem .body-copy {
+      font-size: clamp(1.0625rem, 1.75vw + 0.25rem, 1.25rem);
+      line-height: 1.75;
+    }
+
+    #problem .body-copy p + p {
+      margin-top: 1.25rem;
+    }
+
+    /* ─── Work section ───────────────────────────────── */
+    #work h2 {
+      margin-bottom: 2.5rem;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .portfolio-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: box-shadow 0.2s ease;
+    }
+    .portfolio-card:hover {
+      box-shadow: 0 0 0 1px rgba(240,165,0,0.2), 0 8px 32px var(--accent-muted);
+    }
+
+    .portfolio-card-img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+      background: var(--panel);
+    }
+
+    .portfolio-card-body {
+      padding: 1.5rem;
+    }
+
+    .portfolio-card-body h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .portfolio-card-meta {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .portfolio-card-body p {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .card-placeholder {
+      padding: 3rem 1.5rem;
+      text-align: center;
+      color: var(--hint);
+      font-size: 0.9375rem;
+    }
+
+    /* ─── About section ──────────────────────────────── */
+    #about h2 {
+      margin-bottom: 1.75rem;
+    }
+
+    #about p + p {
+      margin-top: 1.25rem;
+    }
+
+    /* ─── Contact section ────────────────────────────── */
+    #contact h2 {
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-sub {
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 1.75rem;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    label {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-bottom: 2px solid var(--border);
+      border-radius: 4px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 1rem;
+      padding: 0.75rem 1rem;
+      min-height: 48px;
+      width: 100%;
+      transition: border-color 0.15s ease;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237A7872' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-color: var(--surface);
+      padding-right: 2.5rem;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
+      outline: none;
+      border-color: var(--border);
+      border-bottom-color: var(--accent);
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--hint);
+    }
+
+    .form-note {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .form-submit {
+      margin-top: 0.25rem;
+    }
+
+    .form-success {
+      display: none;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 8px;
+      padding: 1.5rem;
+      font-size: 1.0625rem;
+    }
+
+    .form-error {
+      display: none;
+      color: #e05252;
+      font-size: 0.9rem;
+      margin-top: 0.75rem;
+    }
+
+    /* ─── Footer ─────────────────────────────────────── */
+    footer {
+      padding: 2rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 5vw, 2.5rem);
+      color: var(--muted);
+      font-size: 0.875rem;
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    footer a:hover { color: var(--text); }
+
+    /* ─── Reduced motion ─────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- GRAIN OVERLAY -->
-  <div class="noise-overlay" aria-hidden="true"></div>
+  <a href="#main" class="skip-link">Skip to main content</a>
 
-  <!-- NAVIGATION -->
-  <nav class="nav" id="nav">
-    <a href="#hero" class="nav-wordmark">Arensite</a>
-    <div class="nav-links">
-      <a href="#work">work</a>
-      <a href="#about">about</a>
-      <a href="#contact">begin</a>
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="#hero" class="logo" aria-label="Aren's Eye — home">
+        <img src="/assets/logo.png" alt="Aren's Eye logo" width="36" height="36">
+        <span class="logo-name">Aren's Eye</span>
+      </a>
+      <a href="#contact" class="header-cta"><span class="cta-long">Tell me about your business</span><span class="cta-short">Get in touch</span></a>
     </div>
-  </nav>
+  </header>
 
-  <!-- ============================================================ -->
-  <!-- HERO — The Unforgettable Element                             -->
-  <!-- ============================================================ -->
-  <section class="hero" id="hero">
-    <div class="hero-inner">
+  <main id="main">
 
-      <span class="hero-label animate-label">Web Design &middot; Chris Johnson</span>
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="container">
+        <h1>When someone searches for your business right now — what do they find?</h1>
+        <p class="hero-sub">Most local businesses in Allegany County don't have a website. The ones that do often have one that isn't working for them. I build simple, honest sites that show who you are and let people reach you.</p>
+        <a href="#contact" class="btn btn-primary">Tell me about your business</a>
+      </div>
+    </section>
 
-      <!-- The transformation scene -->
-      <div class="hero-scene-wrap animate-image">
-        <div class="hero-scene" id="hero-scene">
+    <hr class="divider">
 
-          <!-- Storefront: wall texture -->
-          <div class="scene-wall"></div>
+    <!-- PROBLEM -->
+    <section id="problem" aria-labelledby="problem-heading">
+      <div class="container">
+        <div class="body-copy">
+          <p>Right now, if someone in Frostburg Googles your business, they probably find a Google Maps listing they didn't set up, a Yelp page they've never touched, and maybe a Facebook page they last updated six months ago.</p>
+          <p>That's not your fault. That's just the gap between where most local businesses are and where a simple website would take them.</p>
+        </div>
+      </div>
+    </section>
 
-          <!-- Storefront: window with interior glow -->
-          <div class="scene-window">
-            <div class="scene-window-pane"></div>
-            <div class="scene-window-glow" id="scene-glow"></div>
-            <div class="scene-window-frame-h" aria-hidden="true"></div>
-            <div class="scene-window-frame-v" aria-hidden="true"></div>
-          </div>
+    <hr class="divider">
 
-          <!-- Storefront: door -->
-          <div class="scene-door">
-            <div class="scene-door-glass"></div>
-            <div class="scene-door-knob"></div>
-          </div>
+    <!-- WORK -->
+    <section id="work" aria-labelledby="work-heading">
+      <div class="container">
+        <span class="section-label">Portfolio</span>
+        <h2 id="work-heading">What I've built</h2>
 
-          <!-- Storefront: awning -->
-          <div class="scene-awning">
-            <div class="scene-awning-stripe"></div>
-          </div>
+        <div class="portfolio-grid">
 
-          <!-- Storefront: sign -->
-          <div class="scene-sign">
-            <span>Thornhill &amp; Co.</span>
-          </div>
+          <article class="portfolio-card">
+            <img
+              src="/assets/wildmoor-preview.jpg"
+              alt="Wildmoor Botanicals website on a laptop"
+              class="portfolio-card-img"
+              loading="lazy"
+              onerror="this.style.display='none'"
+            >
+            <div class="portfolio-card-body">
+              <h3>Wildmoor Botanicals</h3>
+              <p class="portfolio-card-meta">Herb shop &amp; apothecary — Frostburg, MD</p>
+              <p>Before: people searching for them found nothing. Now they find a clean site that tells them who they are, what they offer, and how to get in touch.</p>
+            </div>
+          </article>
 
-          <!-- Sidewalk -->
-          <div class="scene-sidewalk"></div>
-
-          <!-- Painterly overlays (animate in) -->
-          <div class="scene-paint-overlay" id="scene-paint"></div>
-          <div class="scene-gold-light"    id="scene-gold"></div>
-          <div class="scene-vignette"      aria-hidden="true"></div>
+          <article class="portfolio-card">
+            <div class="card-placeholder">
+              <p>More work coming soon.</p>
+            </div>
+          </article>
 
         </div>
       </div>
+    </section>
 
-      <!-- Headline -->
-      <div class="hero-text">
-        <h1 class="hero-headline animate-headline">
-          I build<br>doorways.
-        </h1>
-        <p class="hero-sub animate-sub">
-          Into who you are, what your business means,<br>
-          and how you deserve to be seen.
-        </p>
+    <hr class="divider">
+
+    <!-- ABOUT -->
+    <section id="about" aria-labelledby="about-heading">
+      <div class="container">
+        <span class="section-label">About</span>
+        <h2 id="about-heading">Who's building this</h2>
+        <p>My wife and I just moved to Frostburg from Connecticut and have been getting to know the area. One thing we noticed pretty quickly: a lot of great local businesses here are basically invisible online. Not because they're not worth finding — but because nobody's given them a simple, affordable way to show up.</p>
+        <p>That's a solvable problem. So I'm solving it.</p>
+        <p>I build clean, simple websites for local businesses. Something that shows who you are, what you do, and gives people a way to reach you. No agency markup, no complicated contracts, no features you don't need. Just a site that works.</p>
       </div>
+    </section>
 
-      <!-- Post-transformation line -->
-      <p class="hero-reveal" id="hero-reveal">
-        &ldquo;This is what I see when I look at your business.&rdquo;
-      </p>
+    <hr class="divider">
 
-    </div>
+    <!-- CONTACT -->
+    <section id="contact" aria-labelledby="contact-heading">
+      <div class="container">
+        <span class="section-label">Contact</span>
+        <h2 id="contact-heading">Let's talk about your business</h2>
+        <p class="contact-sub">Fill this out and I'll get back to you within 24 hours. No pitch, no pressure — just a conversation about whether this makes sense for you.</p>
 
-    <div class="hero-gold-rule" aria-hidden="true"></div>
-  </section>
-
-  <!-- ============================================================ -->
-  <!-- WORK — Sunward Cards                                         -->
-  <!-- ============================================================ -->
-  <section class="work" id="work">
-    <div class="work-inner">
-
-      <header class="work-header">
-        <span class="section-label">Work</span>
-        <h2 class="section-headline">Not what I made.<br>What they became.</h2>
-      </header>
-
-      <div class="work-grid">
-
-        <!-- Card 1: Thornhill Candle Co. -->
-        <article class="card card-1 scroll-reveal">
-          <div class="card-image">
-            <div class="card-image-inner ci-candle"></div>
-          </div>
-          <div class="card-divider" aria-hidden="true"></div>
-          <div class="card-text ct-peach">
-            <span class="card-label">Thornhill Candle Co.</span>
-            <p class="card-poem">
-              Warmth that people buy<br>
-              isn&rsquo;t wax &mdash; it&rsquo;s what they find<br>
-              when the wick goes out.
-            </p>
-            <span class="card-descriptor">Brand identity &middot; E-commerce</span>
-          </div>
-        </article>
-
-        <!-- Card 2: Meridian Fitness -->
-        <article class="card card-2 scroll-reveal" style="--stagger: 0.15s">
-          <div class="card-image">
-            <div class="card-image-inner ci-water"></div>
-          </div>
-          <div class="card-divider" aria-hidden="true"></div>
-          <div class="card-text ct-stone">
-            <span class="card-label">Meridian Fitness</span>
-            <p class="card-poem">
-              The body remembers<br>
-              what the mind pretended<br>
-              to forget.
-            </p>
-            <span class="card-descriptor">Web presence &middot; Photography</span>
-          </div>
-        </article>
-
-        <!-- Card 3: Blue Heron Books -->
-        <article class="card card-3 scroll-reveal" style="--stagger: 0.30s">
-          <div class="card-image">
-            <div class="card-image-inner ci-forest"></div>
-          </div>
-          <div class="card-divider" aria-hidden="true"></div>
-          <div class="card-text ct-sage">
-            <span class="card-label">Blue Heron Books</span>
-            <p class="card-poem">
-              Some books are written<br>
-              to be found rather than sought.<br>
-              This is that kind of shop.
-            </p>
-            <span class="card-descriptor">Visual identity &middot; Digital presence</span>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================ -->
-  <!-- ABOUT                                                        -->
-  <!-- ============================================================ -->
-  <section class="about" id="about">
-
-    <div class="thread-line" aria-hidden="true">
-      <svg viewBox="0 0 20 900" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10,0 Q16,110 7,220 Q2,330 13,440 Q19,550 5,660 Q1,770 10,900"
-              stroke="#C49A3C" stroke-width="0.8" fill="none" opacity="0.55"/>
-      </svg>
-    </div>
-
-    <div class="about-inner">
-      <div class="about-grid">
-
-        <div class="about-label-col">
-          <span class="section-label">About</span>
+        <div id="form-success" class="form-success" role="alert" aria-live="polite">
+          Got it. I'll be in touch within 24 hours. — Chris
         </div>
 
-        <div class="about-content scroll-reveal">
-          <h2 class="about-headline">
-            A business has a soul.<br>
-            Most websites don&rsquo;t show it.
-          </h2>
-          <p class="about-body">
-            I&rsquo;m Chris Johnson. I design web presences for businesses that have something real
-            to say &mdash; built by people who care, who&rsquo;ve put their hands in the work, who deserve
-            to be seen the way they actually are, not the way a template decided they should look.
-          </p>
-          <p class="about-body">
-            Arensite is the act of seeing clearly, then showing what you saw.
-          </p>
-          <p class="about-body">
-            The process starts with a conversation. The kind where you do most of the talking.
-          </p>
-        </div>
+        <form id="contact-form" class="contact-form" novalidate>
 
+          <div class="form-field">
+            <label for="name">Your name</label>
+            <input type="text" id="name" name="name" autocomplete="name" required>
+          </div>
+
+          <div class="form-field">
+            <label for="businessName">Business name</label>
+            <input type="text" id="businessName" name="businessName" required>
+          </div>
+
+          <div class="form-field">
+            <label for="businessType">What kind of business?</label>
+            <input type="text" id="businessType" name="businessType" placeholder="e.g. salon, restaurant, contractor..." required>
+          </div>
+
+          <div class="form-field">
+            <label for="hasWebsite">Do you currently have a website?</label>
+            <select id="hasWebsite" name="hasWebsite" required>
+              <option value="" disabled selected></option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+              <option value="needs-work">I think so but it needs work</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="wishPeopleKnew">What's the one thing you wish more people knew about your business?</label>
+            <textarea id="wishPeopleKnew" name="wishPeopleKnew" rows="4" required></textarea>
+            <p class="form-note">This helps me understand what matters most to you before we talk.</p>
+          </div>
+
+          <div class="form-field">
+            <label for="contact">Best way to reach you</label>
+            <input type="text" id="contact" name="contact" placeholder="Email or phone — your choice" autocomplete="email" required>
+          </div>
+
+          <div class="form-submit">
+            <button type="submit" class="btn btn-primary" id="submit-btn">Send it over</button>
+            <p id="form-error" class="form-error" role="alert" aria-live="polite"></p>
+          </div>
+
+        </form>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ============================================================ -->
-  <!-- CONTACT                                                      -->
-  <!-- ============================================================ -->
-  <section class="contact" id="contact">
-    <div class="contact-inner">
-
-      <div class="contact-label-col">
-        <span class="section-label contact-label-text">Begin</span>
-      </div>
-
-      <div class="contact-content scroll-reveal">
-        <h2 class="contact-headline">
-          Every doorway starts<br>with a conversation.
-        </h2>
-        <p class="contact-body">
-          Tell me what you&rsquo;re building. Where it&rsquo;s going.
-          What you want people to feel when they arrive.
-        </p>
-        <a class="contact-link" href="mailto:bcjoh26@gmail.com">
-          bcjoh26@gmail.com
-        </a>
-        <p class="contact-note">
-          No intake forms. No automated responses.<br>
-          Just a reply from me, usually within a day.
-        </p>
-      </div>
-
-    </div>
-  </section>
+  </main>
 
   <!-- FOOTER -->
-  <footer class="footer">
-    <span class="footer-wordmark">Arensite</span>
-    <span class="footer-copy">&copy; 2026 Chris Johnson</span>
+  <footer>
+    <div class="footer-inner">
+      Chris Johnson &mdash; Frostburg, MD &mdash; <a href="mailto:bcjoh26@gmail.com">bcjoh26@gmail.com</a>
+    </div>
   </footer>
 
-  <script src="main.js"></script>
+  <script>
+    (function () {
+      const form      = document.getElementById('contact-form');
+      const success   = document.getElementById('form-success');
+      const errorEl   = document.getElementById('form-error');
+      const submitBtn = document.getElementById('submit-btn');
 
-  <!-- Cloudflare Web Analytics -->
-  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6dacf45bcff645e0bcef670c4a9095ce"}'></script>
-  <!-- End Cloudflare Web Analytics -->
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        errorEl.style.display = 'none';
+
+        const fields = ['name','businessName','businessType','hasWebsite','wishPeopleKnew','contact'];
+        for (var i = 0; i < fields.length; i++) {
+          var el = form.elements[fields[i]];
+          if (!el.value.trim()) {
+            el.focus();
+            errorEl.textContent = 'Please fill out all fields before sending.';
+            errorEl.style.display = 'block';
+            return;
+          }
+        }
+
+        var data = {
+          name:           form.elements.name.value.trim(),
+          businessName:   form.elements.businessName.value.trim(),
+          businessType:   form.elements.businessType.value.trim(),
+          hasWebsite:     form.elements.hasWebsite.value,
+          wishPeopleKnew: form.elements.wishPeopleKnew.value.trim(),
+          contact:        form.elements.contact.value.trim()
+        };
+
+        submitBtn.disabled    = true;
+        submitBtn.textContent = 'Sending...';
+
+        try {
+          var res = await fetch('/submit', {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body:    JSON.stringify(data)
+          });
+          if (!res.ok) throw new Error('server error');
+          form.style.display    = 'none';
+          success.style.display = 'block';
+          success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } catch (_) {
+          submitBtn.disabled    = false;
+          submitBtn.textContent = 'Send it over';
+          errorEl.textContent   = 'Something went wrong. Email me directly at bcjoh26@gmail.com.';
+          errorEl.style.display = 'block';
+        }
+      });
+    })();
+  </script>
+
 </body>
 </html>
