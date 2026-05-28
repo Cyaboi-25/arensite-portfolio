@@ -14,9 +14,17 @@ export async function onRequestPost(context) {
     return json({ error: 'Missing fields' }, 400);
   }
 
-  const websiteLabel = { yes: 'Yes', no: 'No', 'needs-work': 'Needs work' }[hasWebsite] || hasWebsite;
+  const resendKey = env.RESEND_API_KEY;
+  if (!resendKey) {
+    console.error('RESEND_API_KEY not set');
+    return json({ error: 'Server misconfigured' }, 500);
+  }
 
-  const notifyBody = `New lead from Aren's Eye
+  const websiteLabel = { yes: 'Yes', no: 'No', 'needs-work': 'Needs work' }[hasWebsite] || hasWebsite;
+  const notifyEmail  = env.NOTIFY_EMAIL || 'bcjoh26@gmail.com';
+  const fromEmail    = env.FROM_EMAIL   || 'onboarding@resend.dev';
+
+  const notifyBody = `New lead from Arensite
 
 Name:         ${name}
 Business:     ${businessName}
@@ -27,7 +35,7 @@ Contact:      ${contact}
 What they wish people knew:
 ${wishPeopleKnew}
 
-— Aren's Eye contact form`;
+— Arensite contact form`;
 
   const autoReply = `Hey ${name},
 
@@ -37,35 +45,48 @@ I'll follow up within 24 hours. — Chris
 
 P.S. If you want to grab a time now: [CALENDLY LINK]`;
 
-  const notifyEmail = env.NOTIFY_EMAIL || 'bcjoh26@gmail.com';
-  const fromEmail   = env.FROM_EMAIL   || 'noreply@arensite.pages.dev';
-
   try {
-    await sendEmail({ to: notifyEmail, from: fromEmail, subject: `New lead: ${businessName} (${name})`, text: notifyBody });
+    await sendEmail(resendKey, {
+      to:      notifyEmail,
+      from:    fromEmail,
+      subject: `New lead: ${businessName} (${name})`,
+      text:    notifyBody
+    });
 
     if (contact.includes('@')) {
-      await sendEmail({ to: contact, from: fromEmail, subject: "Got it — I'll be in touch soon", text: autoReply });
+      await sendEmail(resendKey, {
+        to:      contact,
+        from:    fromEmail,
+        subject: "Got it — I'll be in touch soon",
+        text:    autoReply
+      });
     }
 
     return json({ success: true }, 200);
   } catch (err) {
-    console.error('Email error:', err);
+    console.error('Email error:', err.message);
     return json({ error: 'Email failed' }, 500);
   }
 }
 
-async function sendEmail({ to, from, subject, text }) {
-  const res = await fetch('https://api.mailchannels.net/tx/v1/send', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+async function sendEmail(apiKey, { to, from, subject, text }) {
+  const res = await fetch('https://api.resend.com/emails', {
+    method:  'POST',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type':  'application/json'
+    },
     body: JSON.stringify({
-      personalizations: [{ to: [{ email: to }] }],
-      from: { email: from, name: "Aren's Eye" },
+      from,
+      to:      [to],
       subject,
-      content: [{ type: 'text/plain', value: text }]
+      text
     })
   });
-  if (!res.ok) throw new Error(`MailChannels ${res.status}: ${await res.text()}`);
+  if (!res.ok) {
+    const detail = await res.text();
+    throw new Error(`Resend ${res.status}: ${detail}`);
+  }
 }
 
 function json(data, status) {

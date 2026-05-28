@@ -769,7 +769,18 @@
               </div>
               <div class="field">
                 <label for="field-business-type">Type of business</label>
-                <input type="text" id="field-business-type" name="businessType" placeholder="Vintage shop, salon..." autocomplete="off" required>
+                <select id="field-business-type" name="businessType" autocomplete="off" required>
+                  <option value="" disabled selected></option>
+                  <option value="Restaurant / food &amp; drink">Restaurant / food &amp; drink</option>
+                  <option value="Salon / beauty">Salon / beauty</option>
+                  <option value="Retail shop">Retail shop</option>
+                  <option value="Contractor / trades">Contractor / trades</option>
+                  <option value="Health &amp; wellness">Health &amp; wellness</option>
+                  <option value="Professional services">Professional services</option>
+                  <option value="Arts / photography / creative">Arts / photography / creative</option>
+                  <option value="Tattoo / piercing studio">Tattoo / piercing studio</option>
+                  <option value="Other">Other</option>
+                </select>
               </div>
               <div class="field">
                 <label for="field-has-website">Do you have a website?</label>
